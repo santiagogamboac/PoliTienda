@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.ejemplo.controlador.ProductoElectronicoViewController">
+    <children>
+        <TableView fx:id="productoTable">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" />
+                <TableColumn fx:id="descripcionColumn" text="Descripción" />
+                <TableColumn fx:id="precioColumn" text="Precio" />
+                <TableColumn fx:id="garantiaColumn" text="Garantía" />
+            </columns>
+        </TableView>
+        <HBox spacing="10" padding="10">
+            <children>
+                <TextField fx:id="idField" promptText="ID" />
+                <TextField fx:id="descripcionField" promptText="Descripción" />
+                <TextField fx:id="precioField" promptText="Precio" />
+                <TextField fx:id="garantiaField" promptText="Garantía" />
+                <Button text="Agregar" onAction="#handleAddProducto" />
+                <Button text="Actualizar" onAction="#handleUpdateProducto" />
+                <Button text="Eliminar" onAction="#handleDeleteProducto" />
+            </children>
+        </HBox>
+    </children>
+</VBox>
