@@ -86,7 +86,7 @@ public class ClienteDAO implements ICrudDAO<Cliente> {
             stmt.setString(1, cliente.getNombre());            
             stmt.setString(2, id);
             int filas = stmt.executeUpdate();
-            if (filas > 0) {
+            if (filas > 0) { 
                return("Cliente actualizado correctamente.");
             } else {
                 return("Cliente no encontrado.");

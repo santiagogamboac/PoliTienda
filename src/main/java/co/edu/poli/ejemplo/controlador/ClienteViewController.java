@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import co.edu.poli.ejemplo.modelo.Cliente;
+import co.edu.poli.ejemplo.modelo.ProductoElectronico;
 import co.edu.poli.ejemplo.servicio.ClienteDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,24 +14,48 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-public class ClienteViewController implements  Initializable {
+import javafx.scene.input.MouseEvent;
+
+public class ClienteViewController implements Initializable {
+
+    ClienteDAO clienteDAO;
+    Boolean edicion = false;
+    ProductoElectronico producto;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            ClienteDAO clienteDAO = new ClienteDAO();
+            edicion = false;
+            clienteDAO = new ClienteDAO();
             columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
             columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
 
             ObservableList<Cliente> lista = FXCollections.observableArrayList(clienteDAO.readAll());
             tblregistrocliente.setItems(lista);
+
+            producto = new ProductoElectronico("1", "Producto Electronico", 1000, 110);
+
         } catch (Exception e) {
             org.controlsfx.control.Notifications.create().title("Error").text("Error al cargar clientes").showError();
         }
     }
     @FXML
+    private Button btnConfirmar;
+
+    @FXML
+    private Button btnLimpiar;
+
+    @FXML
+    private Button btnactualizar;
+
+    @FXML
     private Button btneliminar;
+
+    @FXML
+    private TextArea cloneTextArea;
 
     @FXML
     private Button btnguardar;
@@ -51,28 +76,102 @@ public class ClienteViewController implements  Initializable {
     private TextField txtnombre;
 
     @FXML
-    void EliminarCliente(ActionEvent event) {
-
+    void GuardarCliente(ActionEvent event) {
+        edicion = false;
+        txtid.setDisable(false);
+        btnactualizar.setStyle("-fx-background-color: gray");
+        btnguardar.setStyle("-fx-background-color: blue");
     }
 
     @FXML
-    void GuardarCliente(ActionEvent event) {
-        if (txtid.getText().isEmpty() || txtnombre.getText().isEmpty()) {
-            org.controlsfx.control.Notifications.create().title("Advertencia").text("Ingrese todos los datos para poder registrar un cliente").showWarning();
-            System.out.println("Por favor ingrese los datos del cliente");
+    void ActualizarCliente(ActionEvent event) {
+        edicion = true;
+        btnactualizar.setStyle("-fx-background-color: blue");
+        btnguardar.setStyle("-fx-background-color: gray");
+    }
+
+    @FXML
+    void EliminarCliente(ActionEvent event) {
+        if (txtid.getText().isEmpty()) {
+            org.controlsfx.control.Notifications.create().title("Advertencia").text("Ingrese el id del cliente a eliminar").showWarning();
+            System.out.println("Por favor ingrese el id del cliente a eliminar");
+
         } else {
-            Cliente cliente = new Cliente(txtid.getText(), txtnombre.getText());
-            
-            try {
-                ClienteDAO clienteDAO = new ClienteDAO();
-                
-                String msj = clienteDAO.create(cliente);
-                org.controlsfx.control.Notifications.create().title("Error").text(msj).show();
-            } catch (Exception e) {
-                org.controlsfx.control.Notifications.create().title("Error").text("Error al guardar cliente").showError();
-            }
-            
-            System.out.println(cliente);
+            String msg = clienteDAO.delete(txtid.getText());
+            org.controlsfx.control.Notifications.create().title("Atención").text(msg).showWarning();
+
+            ObservableList<Cliente> lista = FXCollections.observableArrayList(clienteDAO.readAll());
+            tblregistrocliente.setItems(lista);
         }
     }
+
+    @FXML
+    void Btn_Click_Confirmar(ActionEvent event) {
+
+        if (edicion) {
+            if (txtid.getText().isEmpty() || txtnombre.getText().isEmpty()) {
+                org.controlsfx.control.Notifications.create().title("Advertencia").text("Ingrese todos los datos para poder registrar un cliente").showWarning();
+                System.out.println("Por favor ingrese los datos del cliente");
+            } else {
+                Cliente clienteSeleccionado = tblregistrocliente.getSelectionModel().getSelectedItem();
+                clienteSeleccionado.setNombre(txtnombre.getText());
+                String msj = clienteDAO.update(txtid.getText(), clienteSeleccionado);
+                org.controlsfx.control.Notifications.create().title("Atención").text(msj).show();
+                ActualizarVista();
+            }
+        } else {
+            if (txtid.getText().isEmpty() || txtnombre.getText().isEmpty()) {
+                org.controlsfx.control.Notifications.create().title("Advertencia").text("Seleccione un cliente antes de dar click en actualizar").showWarning();            
+            } else {
+                try {
+                    Cliente cliente = new Cliente(txtid.getText(), txtnombre.getText());
+                    String msj = clienteDAO.create(cliente);
+                    org.controlsfx.control.Notifications.create().title("Atención").text(msj).show();
+                    ObservableList<Cliente> lista = FXCollections.observableArrayList(clienteDAO.readAll());
+                    tblregistrocliente.setItems(lista);
+                    Limpiar();
+                } catch (Exception e) {
+                    org.controlsfx.control.Notifications.create().title("Error").text("Error al guardar cliente").showError();
+                }
+            }
+        }
+    }
+
+    @FXML
+    void BtnLimpiar_Click(ActionEvent event) {
+        Limpiar();
+    }
+
+    @FXML
+    void handleTableClick(MouseEvent event) {
+        edicion = true;
+        btnactualizar.setStyle("-fx-background-color: blue");
+        btnguardar.setStyle("-fx-background-color: gray");
+        txtid.setDisable(true);
+        Cliente clienteSeleccionado = tblregistrocliente.getSelectionModel().getSelectedItem();
+
+        if (clienteSeleccionado != null) {
+            txtid.setText(String.valueOf(clienteSeleccionado.getId()));
+            txtnombre.setText(clienteSeleccionado.getNombre());
+        }
+    }
+
+    @FXML
+    void Btn_ClonarClick(ActionEvent event) {
+// Clonar el producto
+        ProductoElectronico productoClonado = (ProductoElectronico) producto.clone();
+        cloneTextArea.appendText(productoClonado.toString() + "\n\n");
+    }
+
+    public void ActualizarVista() {
+        ObservableList<Cliente> lista = FXCollections.observableArrayList(clienteDAO.readAll());
+        tblregistrocliente.setItems(lista);
+        Limpiar();
+    }
+
+    public void Limpiar() {
+        txtid.setText("");
+        txtnombre.setText("");
+    }
+
 }

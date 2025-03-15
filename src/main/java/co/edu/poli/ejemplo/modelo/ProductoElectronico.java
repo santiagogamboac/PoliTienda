@@ -1,9 +1,9 @@
 package co.edu.poli.ejemplo.modelo;
 
 /**
- * 
+ *
  */
-public class ProductoElectronico extends Producto {
+public class ProductoElectronico extends Producto implements Prototype {
 
     /**
      * Default constructor
@@ -14,14 +14,30 @@ public class ProductoElectronico extends Producto {
     }
 
     /**
-     * 
+     *
      */
     private int voltajeEntrada;
+
     public int getVoltajeEntrada() {
         return voltajeEntrada;
     }
 
     public void setVoltajeEntrada(int voltajeEntrada) {
         this.voltajeEntrada = voltajeEntrada;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + this.getId()
+                + "\nNombre: " + this.getDescripcion()
+                + "\nPrecio: $" + this.getPrecio()
+                + // ... otros atributos específicos de ProductoElectronico
+                "\nMarca: " + this.getVoltajeEntrada();
+    }
+
+    @Override
+    public Prototype clone() {
+
+        return new ProductoElectronico(getId(), getDescripcion(), getPrecio(), getVoltajeEntrada());
     }
 }

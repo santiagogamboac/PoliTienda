@@ -52,4 +52,11 @@ public abstract class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    @Override
+    public Prototype clone() {
+        
+        Producto producto = new ProductoElectronico ("1","Producto Electronico", 1000, 110);
+        return (Prototype) producto;
+    }
 }

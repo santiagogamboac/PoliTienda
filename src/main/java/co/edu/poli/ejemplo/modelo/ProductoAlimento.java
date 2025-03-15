@@ -3,7 +3,7 @@ package co.edu.poli.ejemplo.modelo;
 /**
  *
  */
-public class ProductoAlimento extends Producto {
+public class ProductoAlimento extends Producto implements Prototype {
 
     /**
      * Default constructor
@@ -23,5 +23,11 @@ public class ProductoAlimento extends Producto {
     }
     public void setCalorias(int calorias) {
         this.calorias = calorias;
+    }
+
+    @Override
+    public Prototype clone() {
+        
+        return (ProductoAlimento) super.clone();
     }
 }
