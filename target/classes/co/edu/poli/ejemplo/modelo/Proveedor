@@ -1,0 +1,84 @@
+public class Proveedor {
+    private String nombre;
+    private String celular;
+    private certificacion certificacion;
+    private evaluacion evaluacion;
+    private politicaEntrega politicaEntrega;
+
+
+      private Proveedor(ProveedorBuilder builder) {
+        this.nombre = builder.nombre;
+        this.celular = builder.celular;
+        this.certificacion = builder.certificacion;
+        this.evaluacion = builder.evaluacion;
+        this.politicaEntrega = builder.politicaEntrega;
+    
+    }
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getcelular() {
+        return celular;
+    }
+
+    public String getcertificacion() {
+        return certificacion;
+    }
+
+    public String getevaluacion() {
+        return evaluacion;
+    }
+
+    public String getpoliticaEntrega() {
+        return politicaEntrega;
+    }
+
+        // Método toString para visualizar los datos
+        @Override
+        public String toString() {
+            return "Proveedor{" +
+                    "nombre='" + nombre + '\'' +
+                    ", celular='" + celular + '\'' +
+                    ", certificacion='" + certificacion + '\'' +
+                    ", evaluacion='" + evaluacion + '\'' +
+                    ", politicaEntrega='" + politicaEntrega + '\'' +
+                    '}';
+        }
+
+        public static class ProveedorBuilder {
+            private String nombre;
+            private String celular;
+            private certificacion certificacion;
+            private evaluacion evaluacion;
+            private politicaEntrega politicaEntrega;
+    
+            public ProveedorBuilder setNombre(String nombre) {
+                this.nombre = nombre;
+                return this;
+            }
+    
+            public ProveedorBuilder setcelular(String celular) {
+                this.celular = celular;
+                return this;
+            }
+    
+            public ProveedorBuilder setcertificacion(String certificacion) {
+                this.certificacion = certificacion;
+                return this;
+            }
+    
+            public ProveedorBuilder setevaluacion(String evaluacion) {
+                this.evaluacion = evaluacion;
+                return this;
+            }
+    
+            public ProveedorBuilder setpoliticaEntrega(String politicaEntrega) {
+                this.politicaEntrega = politicaEntrega;
+                return this;
+            }
+    
+            public Proveedor build() {
+                return new Proveedor(this);
+            }
+        }

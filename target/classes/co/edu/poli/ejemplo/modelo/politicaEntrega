@@ -1,0 +1,19 @@
+public class PoliticaEntrega {
+
+    private String tipo;
+
+    // Constructor
+    public PoliticaEntrega(String tipo) {
+        this.tipo = tipo;
+    }
+
+    // Método getter
+    public String getTipo() {
+        return tipo;
+    }
+
+    // Método setter
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+}

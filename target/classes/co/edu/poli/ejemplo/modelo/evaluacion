@@ -1,0 +1,28 @@
+public class Evaluacion {
+
+
+    private int puntaje;
+
+    // Constructor para inicializar el atributo puntaje
+    public Evaluacion(int puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    // Getter para obtener el puntaje
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    // Setter para modificar el puntaje
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    // Método toString para mostrar la información de la evaluación
+    @Override
+    public String toString() {
+        return "Evaluacion{" +
+                "puntaje=" + puntaje +
+                '}';
+    }
+}
