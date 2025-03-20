@@ -36,10 +36,10 @@ public class ClienteViewController implements Initializable {
             ObservableList<Cliente> lista = FXCollections.observableArrayList(clienteDAO.readAll());
             tblregistrocliente.setItems(lista);
 
-            producto = new ProductoElectronico("1", "Producto Electronico", 1000, 110);
+            
 
         } catch (Exception e) {
-            org.controlsfx.control.Notifications.create().title("Error").text("Error al cargar clientes").showError();
+            // org.controlsfx.control.Notifications.create().title("Error").text("Error al cargar clientes").showError();
         }
     }
     @FXML
@@ -121,7 +121,7 @@ public class ClienteViewController implements Initializable {
             }
         } else {
             if (txtid.getText().isEmpty() || txtnombre.getText().isEmpty()) {
-                org.controlsfx.control.Notifications.create().title("Advertencia").text("Seleccione un cliente antes de dar click en actualizar").showWarning();            
+                org.controlsfx.control.Notifications.create().title("Advertencia").text("Los campos deben estar llenos.").showWarning();            
             } else {
                 try {
                     Cliente cliente = new Cliente(txtid.getText(), txtnombre.getText());
@@ -159,6 +159,8 @@ public class ClienteViewController implements Initializable {
     @FXML
     void Btn_ClonarClick(ActionEvent event) {
 // Clonar el producto
+producto = new ProductoElectronico("1", "Producto Electronico", 1000, 110);
+
         ProductoElectronico productoClonado = (ProductoElectronico) producto.clone();
         cloneTextArea.appendText(productoClonado.toString() + "\n\n");
     }
