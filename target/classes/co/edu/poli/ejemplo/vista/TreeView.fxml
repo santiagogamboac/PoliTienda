@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.ejemplo.controlador.TreeTableViewController">
+   <children>
+      <TreeTableView fx:id="treeTableVw" layoutX="42.0" layoutY="31.0" prefHeight="450.0" prefWidth="368.0">
+        <columns>
+          <TreeTableColumn fx:id="colNombre" prefWidth="193.5999755859375" text="C1" />
+          <TreeTableColumn fx:id="colTipo" minWidth="2.4000244140625" prefWidth="173.5999755859375" text="C2" />
+        </columns>
+      </TreeTableView>
+         <VBox layoutX="487.0" layoutY="97.0" spacing="10.0">
+            <Label text="Detalles del Nodo Seleccionado" />
+            <Label text="Nombre:" />
+            <TextField fx:id="txtNombre" editable="false" />
+            <Label text="Tipo:" />
+            <TextField fx:id="txtTipo" editable="false" />
+            <Label text="Posición:" />
+            <TextField fx:id="txtPosicion" editable="false" />
+        </VBox>
+   </children>
+</AnchorPane>

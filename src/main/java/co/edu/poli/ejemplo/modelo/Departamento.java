@@ -1,67 +1,41 @@
 package co.edu.poli.ejemplo.modelo;
-import java.util.List;
+import java.util.*;
 
-/**
- * 
- */
-public class Departamento extends Unidad {
+public class Departamento implements Component, CompositeOperations {
 
-    /**
-     * Default constructor
-     */
-    public Departamento() {
+    private String name;
+    private List<Component> components = new ArrayList<Component>();
+
+    public Departamento(String name) {
+        this.name = name;
     }
 
-    /**
-     * 
-     */
-    private String nombre;
-
-    /**
-     * 
-     */
-    private List<Unidad> miembros;
-
-    /**
-     * @param m
-     */
-    public void agregarMiembro(Unidad m) {
-     miembros.add(m);
+    @Override
+    public String getName() {        
+        return name;
     }
 
-    /**
-     * @param m
-     */
-    public void eliminarMiembro(Unidad m) {
-       miembros.remove(m);
+    public void add(Component component) {
+        components.add(component);      
+    }
+  
+    public void remove(Component component) {
+        components.remove(component);    
     }
 
-    /**
-     * @param indice 
-     * @return
-     */
-    public Unidad getMiembro(int indice) {
-        for (Object elem : miembros) {
-            System.out.println(elem);
+     public Component getChild(int index) {
+        if (index >= 0 && index < components.size()) {
+            return components.get(index);
         }
-
         return null;
     }
 
     /**
      * @return
      */
-    public Void mostrarDetalle() {
-        // TODO implement Component.mostrarDetalle() here
-        return null;
-    }
-
-    /**
-     * @return
-     */
-    public String getNombre() {
-   
-        return "";
+    public List<Component> getComponents() {
+        return new ArrayList<>(components);
+  
     }
 
 }

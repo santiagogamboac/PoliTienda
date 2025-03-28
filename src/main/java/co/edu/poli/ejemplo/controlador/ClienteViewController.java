@@ -10,7 +10,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -18,6 +21,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class ClienteViewController implements Initializable {
 
@@ -42,6 +46,9 @@ public class ClienteViewController implements Initializable {
             // org.controlsfx.control.Notifications.create().title("Error").text("Error al cargar clientes").showError();
         }
     }
+
+    @FXML
+    private Button Btn_Tree;
     @FXML
     private Button btnConfirmar;
 
@@ -142,6 +149,22 @@ public class ClienteViewController implements Initializable {
         Limpiar();
     }
 
+    @FXML
+    void Btn_Tree_Click(ActionEvent event) {
+try {
+        // Cargar el archivo FXML del TreeView
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/poli/ejemplo/vista/TreeView.fxml"));
+        Parent root = fxmlLoader.load();
+
+        // Crear una nueva ventana (Stage)
+        Stage stage = new Stage();
+        stage.setTitle("Jerarquía de Departamentos y Empleados");
+        stage.setScene(new Scene(root));
+        stage.show();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
     @FXML
     void handleTableClick(MouseEvent event) {
         edicion = true;
