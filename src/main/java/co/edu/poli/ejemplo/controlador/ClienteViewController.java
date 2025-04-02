@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -52,12 +53,17 @@ public class ClienteViewController implements Initializable {
     }
 
     @FXML
-    private Button Btn_Tree;
+    private MenuItem Btn_Tree;
+    
+    @FXML
+    private MenuItem btn_builder;
+    
+    @FXML
+    private MenuItem btn_Decorator;
+
     @FXML
     private Button btnConfirmar;
 
-    @FXML
-    private Button btn_Decorator;
     @FXML
     private Button btnLimpiar;
 
@@ -213,6 +219,8 @@ public class ClienteViewController implements Initializable {
 
     }
 
+
+
     @FXML
     void Btn_Tree_Click(ActionEvent event) {
         try {
@@ -223,6 +231,23 @@ public class ClienteViewController implements Initializable {
             // Crear una nueva ventana (Stage)
             Stage stage = new Stage();
             stage.setTitle("Jerarquía de Departamentos y Empleados");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void btn_bridge_Click(ActionEvent event) {
+        try {
+            // Cargar el archivo FXML del envío
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/poli/ejemplo/vista/EnvioView.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Crear una nueva ventana (Stage)
+            Stage stage = new Stage();
+            stage.setTitle("Gestión de Envíos");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
@@ -278,8 +303,7 @@ public class ClienteViewController implements Initializable {
         System.out.println("Points earned: " + cart.calculatePoints());
         System.out.println();
     }
-     @FXML
-    private Button btn_builder;
+  
 
     @FXML
     void btn_builder_click(ActionEvent event) {
