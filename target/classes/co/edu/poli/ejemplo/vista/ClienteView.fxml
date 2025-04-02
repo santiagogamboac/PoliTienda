@@ -58,6 +58,8 @@
             <Button fx:id="btnclonar" layoutX="584.0" layoutY="195.0" mnemonicParsing="false" onAction="#Btn_ClonarClick" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: green;" text="Clonar" textFill="WHITE" />
             <Button fx:id="Btn_Tree" layoutX="550.0" layoutY="32.0" mnemonicParsing="false" onAction="#Btn_Tree_Click" text="Ver patrón Composite" />
             <Button fx:id="btn_Decorator" layoutX="711.0" layoutY="96.0" mnemonicParsing="false" onAction="#btn_Decorator_Click" text="Decorator" />
+            <Button fx:id="Btn_Tree" layoutX="110.0" layoutY="32.0" mnemonicParsing="false" onAction="#Btn_Tree_Click" text="Ver patrón Composite" />
+            <Button fx:id="btn_builder" layoutX="110.0" layoutY="32.0" mnemonicParsing="false" onAction="#btn_builder_click" text="Ver patrón Builder" />
          </children>
       </AnchorPane>
    </children>

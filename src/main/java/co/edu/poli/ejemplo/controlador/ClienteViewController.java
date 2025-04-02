@@ -278,5 +278,25 @@ public class ClienteViewController implements Initializable {
         System.out.println("Points earned: " + cart.calculatePoints());
         System.out.println();
     }
+     @FXML
+    private Button btn_builder;
+
+    @FXML
+    void btn_builder_click(ActionEvent event) {
+        try {
+            // Cargar el archivo FXML del TreeView
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/co/edu/poli/ejemplo/vista/BuilderViewController.fxml"));
+            Parent root = fxmlLoader.load();
+    
+            // Crear una nueva ventana (Stage)
+            Stage stage = new Stage();
+            stage.setTitle("Jerarquía de Departamentos y Empleados");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
 
 }
