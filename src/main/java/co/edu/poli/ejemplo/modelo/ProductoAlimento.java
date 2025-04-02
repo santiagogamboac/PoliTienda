@@ -30,4 +30,13 @@ public class ProductoAlimento extends Producto implements Prototype {
         
         return (ProductoAlimento) super.clone();
     }
+    @Override
+public String toString() {
+    return "ProductoAlimento{" +
+           "id='" + getId() + '\'' +
+           ", nombre='" + getDescripcion() + '\'' +
+           ", precio=" + getPrecio() +
+           ", calorias=" + getCalorias() +
+           '}';
+}
 }

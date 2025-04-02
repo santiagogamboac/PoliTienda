@@ -20,7 +20,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <AnchorPane prefHeight="473.0" prefWidth="746.0">
+      <AnchorPane prefHeight="473.0" prefWidth="890.0">
          <children>
             <Label layoutX="288.0" layoutY="36.0" text="Registrar cliente" />
             <GridPane layoutX="67.0" layoutY="80.0" prefHeight="114.0" prefWidth="644.0" AnchorPane.leftAnchor="67.0">
@@ -56,6 +56,8 @@
             </TableView>
             <TextArea fx:id="cloneTextArea" layoutX="584.0" layoutY="262.0" prefHeight="200.0" prefWidth="200.0" />
             <Button fx:id="btnclonar" layoutX="584.0" layoutY="195.0" mnemonicParsing="false" onAction="#Btn_ClonarClick" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: green;" text="Clonar" textFill="WHITE" />
+            <Button fx:id="Btn_Tree" layoutX="550.0" layoutY="32.0" mnemonicParsing="false" onAction="#Btn_Tree_Click" text="Ver patrón Composite" />
+            <Button fx:id="btn_Decorator" layoutX="711.0" layoutY="96.0" mnemonicParsing="false" onAction="#btn_Decorator_Click" text="Decorator" />
          </children>
       </AnchorPane>
    </children>
