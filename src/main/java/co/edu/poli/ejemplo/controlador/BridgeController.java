@@ -7,6 +7,7 @@ import co.edu.poli.ejemplo.modelo.CargaFragil;
 import co.edu.poli.ejemplo.modelo.CargaPesada;
 import co.edu.poli.ejemplo.modelo.Documento;
 import co.edu.poli.ejemplo.modelo.Envio;
+import co.edu.poli.ejemplo.modelo.EnvioExpress;
 import co.edu.poli.ejemplo.modelo.EnvioInternacional;
 import co.edu.poli.ejemplo.modelo.EnvioNacional;
 import co.edu.poli.ejemplo.modelo.Mercancia;
@@ -34,7 +35,7 @@ public class BridgeController implements Initializable{
     @FXML
     private ChoiceBox<String> selectMerch;
     
-    private String[] opcionEnvio = {"Nacional", "Internacional"};
+    private String[] opcionEnvio = {"Nacional", "Internacional", "Express"};
     private String[] opcionMercancia = {"Carga Pesada", "Carga Frágil", "Documentos"};
 
     Envio tipoEnvio;
@@ -58,6 +59,9 @@ public class BridgeController implements Initializable{
                 break;
                 case "Internacional" :
                     tipoEnvio = new EnvioInternacional(300, 0.2);
+                break;
+                case "Express" :
+                    tipoEnvio = new EnvioExpress(500);
                 break;
             }
 
