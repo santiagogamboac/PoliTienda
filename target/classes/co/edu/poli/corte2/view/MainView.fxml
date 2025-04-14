@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="1075.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.corte2.controller.MainController">
+   <children>
+      <BorderPane layoutY="1.0" prefHeight="682.0" prefWidth="1075.0">
+         <left>
+            <Pane prefHeight="203.0" prefWidth="236.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="imgLogin" fitHeight="150.0" fitWidth="185.0" layoutX="52.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="https://simg.nicepng.com/png/small/918-9180881_user-registration-icon-png-enable-user-icon-png.png" />
+                     </image></ImageView>
+                  <TextField fx:id="txtUser" layoutX="44.0" layoutY="64.0" promptText="Usuario" />
+                  <Button fx:id="btnLogin" layoutX="74.0" layoutY="136.0" mnemonicParsing="false" onAction="#ValidateUser" text="Iniciar Sesión" />
+                  <Label layoutX="55.0" layoutY="22.0" text="Inicio de Sesión">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="txtPass" layoutX="44.0" layoutY="96.0" promptText="Password" />
+                  <Button fx:id="btnCustomer" layoutX="17.0" layoutY="207.0" mnemonicParsing="false" onAction="#customerInterface" prefHeight="25.0" prefWidth="213.0" text="Gestion de Clientes" />
+                  <Button fx:id="btnProduct" layoutX="17.0" layoutY="241.0" mnemonicParsing="false" onAction="#productInterface" prefHeight="25.0" prefWidth="213.0" text="Gestion de Productos" />
+                  <Button fx:id="btnVendor" layoutX="17.0" layoutY="273.0" mnemonicParsing="false" onAction="#vendorInterface" prefHeight="25.0" prefWidth="213.0" text="Gestion de Proveedores" />
+               </children>
+            </Pane>
+         </left>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="262.0" layoutY="71.0" text="Listado de Productos">
+                     <font>
+                        <Font size="34.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tblProducts" layoutX="162.0" layoutY="185.0" prefHeight="312.0" prefWidth="522.0">
+                    <columns>
+                      <TableColumn fx:id="idProducts" onEditCommit="#productDetail" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="nameProducts" prefWidth="442.0" text="Producto" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
