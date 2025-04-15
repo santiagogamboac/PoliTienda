@@ -16,7 +16,8 @@ public class ProductAccessProxy implements ProductAccess {
      * @return
      */
     public String viewProductDetail(Product product) {
-        
+        System.out.println("Producto: " + product.getId());
+        //user = UserRepository.getUser(username, password)
         if("ADMIN".equalsIgnoreCase(user.getRole())){
             return realAccess.viewProductDetail(product);
         } else {

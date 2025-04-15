@@ -1,10 +1,14 @@
 package co.edu.poli.corte2.controller;
 
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
 import co.edu.poli.corte2.model.Product;
 import co.edu.poli.corte2.model.ProductAccessProxy;
+import co.edu.poli.corte2.model.ProductRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,11 +41,11 @@ public class ProductController  implements Initializable{
     private TextField txtIdProduct;
 
     @FXML
-    void productDetails(ActionEvent event) {
+    void productDetails(ActionEvent event) throws Exception {
         int idProducto;
         idProducto = Integer.parseInt(txtIdProduct.getText());
-        System.out.println("Producto: " + idProducto);
-        producto.setId(idProducto);
+        producto = ProductRepository.getProduct(idProducto);
+        System.out.println("Producto" + producto.getName());
         String prodDetail = pap.viewProductDetail(producto);
         mensaje.setContentText(prodDetail);
         mensaje.show();  
@@ -49,9 +53,15 @@ public class ProductController  implements Initializable{
 
     ObservableList<Product> initialData(){
     
-        Product p1 = new Product(1, "Tablet Lenovo", "Tableta con Android", 380000);
-        Product p2 = new Product(2, "SmartPhone Samsung", "Celular gama alta", 4850000);
-        return FXCollections.<Product> observableArrayList(p1, p2);
+        ObservableList<Product> productList = FXCollections.<Product> observableArrayList();
+        try {
+            Map<String, Product> p = ProductRepository.getAllProducts();
+            productList.addAll(p.values());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return productList;
     }
 
     @Override
