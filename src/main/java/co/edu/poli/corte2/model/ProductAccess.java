@@ -1,8 +1,5 @@
 package co.edu.poli.corte2.model;
 
-import java.io.*;
-import java.util.*;
-
 /**
  * 
  */

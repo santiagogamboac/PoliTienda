@@ -1,54 +1,40 @@
 package co.edu.poli.corte2.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 
-import co.edu.poli.corte2.model.Product;
 import co.edu.poli.corte2.model.User;
 import co.edu.poli.corte2.model.UserRepository;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
-public class MainController implements Initializable{
+
+public class MainController{
 
     Alert mensaje = new Alert(AlertType.INFORMATION);
     Alert error = new Alert(AlertType.ERROR);
-    
+
+    @FXML
+    private Button btnCustomer;
+
     @FXML
     private Button btnLogin;
 
     @FXML
+    private Button btnProduct;
+
+    @FXML
+    private Button btnVendor;
+    
+    @FXML
     private ImageView imgLogin;
-
-    @FXML
-    private TableColumn<Product, Integer> idProducts;
-
-    @FXML
-    private TableColumn<Product, String> nameProducts;
-
-    @FXML
-    private TableView tblProducts;
-
-    @FXML
-    private Button slCustomer;
-
-    @FXML
-    private Button slProduct;
-
-    @FXML
-    private Button slVendor;
 
     @FXML
     private PasswordField txtPass;
@@ -56,10 +42,11 @@ public class MainController implements Initializable{
     @FXML
     private TextField txtUser;
 
+    @FXML
+    private VBox vboxPrincipal;
 
     @FXML
-    void ValidateUser(ActionEvent event) throws Exception {
-        
+    void ValidateUser(ActionEvent event) {
         UserRepository usuarios = new UserRepository();
         String clave = txtPass.getText();
         String user = txtUser.getText();
@@ -82,13 +69,33 @@ public class MainController implements Initializable{
 
     @FXML
     void customerInterface(ActionEvent event) {
-        mensaje.setContentText("Proximamente");
-        mensaje.show();
+        try {
+            // Cargar ProductoView.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/poli/corte2/view/CustomerView.fxml"));
+            VBox productoVBox = loader.load();
+
+            // Reemplazar el VBox principal
+            vboxPrincipal.getChildren().clear(); // Vaciar el contenido actual
+            vboxPrincipal.getChildren().add(productoVBox); // Agregar el nuevo VBox
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    void productInterface(ActionEvent event) {
+    void productInterface(ActionEvent event) throws IOException {
+       
+        try {
+            // Cargar ProductoView.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/poli/corte2/view/ProductView.fxml"));
+            VBox productoVBox = loader.load();
 
+            // Reemplazar el VBox principal
+            vboxPrincipal.getChildren().clear(); // Vaciar el contenido actual
+            vboxPrincipal.getChildren().add(productoVBox); // Agregar el nuevo VBox
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -96,24 +103,4 @@ public class MainController implements Initializable{
         mensaje.setContentText("Proximamente");
         mensaje.show();
     }
-
-    @FXML
-    void productDetail(ActionEvent event) {
-        System.out.println("se toco este campo");
-    }
-
-    ObservableList<Product> initialData(){
-    
-        Product p1 = new Product(1, "Tablet Lenovo", "Tableta con Android", 380000);
-        Product p2 = new Product(2, "SmartPhone Samsung", "Celular gama alta", 4850000);
-        return FXCollections.<Product> observableArrayList(p1, p2);
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        idProducts.setCellValueFactory(new PropertyValueFactory<Product, Integer>("id"));
-        nameProducts.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-        tblProducts.setItems(initialData());  
-    }
-
 }

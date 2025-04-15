@@ -1,9 +1,7 @@
 package co.edu.poli.corte2.view;
 
 import java.io.IOException;
-import java.util.List;
 
-import co.edu.poli.corte2.model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +14,6 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private static Scene scene;
-    List<User> usuario;
 
     @Override
     public void start(Stage stage) throws IOException {

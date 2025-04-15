@@ -14,7 +14,12 @@ public class UserRepository {
 
     public static User getUser(String username, String password) throws Exception{
         try {
-            return users.get(username);
+            User usuario = users.get(username);
+            if(usuario.getUserName().equals(username) && usuario.getPassword().equals(password)){
+                return users.get(username);
+            }else {
+                return null;
+            }
         } catch (Exception e) {
             return null;
         }

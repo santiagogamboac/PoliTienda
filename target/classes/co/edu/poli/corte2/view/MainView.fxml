@@ -3,19 +3,18 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="1075.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.corte2.controller.MainController">
    <children>
-      <BorderPane layoutY="1.0" prefHeight="682.0" prefWidth="1075.0">
+      <BorderPane layoutX="-6.0" prefHeight="682.0" prefWidth="1075.0">
          <left>
             <Pane prefHeight="203.0" prefWidth="236.0" BorderPane.alignment="CENTER">
                <children>
@@ -38,21 +37,7 @@
             </Pane>
          </left>
          <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label layoutX="262.0" layoutY="71.0" text="Listado de Productos">
-                     <font>
-                        <Font size="34.0" />
-                     </font>
-                  </Label>
-                  <TableView fx:id="tblProducts" layoutX="162.0" layoutY="185.0" prefHeight="312.0" prefWidth="522.0">
-                    <columns>
-                      <TableColumn fx:id="idProducts" onEditCommit="#productDetail" prefWidth="75.0" text="ID" />
-                      <TableColumn fx:id="nameProducts" prefWidth="442.0" text="Producto" />
-                    </columns>
-                  </TableView>
-               </children>
-            </Pane>
+            <VBox fx:id="vboxPrincipal" prefHeight="680.0" prefWidth="840.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>
