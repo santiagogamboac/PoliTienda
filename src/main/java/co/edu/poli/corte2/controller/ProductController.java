@@ -1,14 +1,15 @@
 package co.edu.poli.corte2.controller;
 
 import java.net.URL;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
 import co.edu.poli.corte2.model.Product;
+import co.edu.poli.corte2.model.ProductAccess;
 import co.edu.poli.corte2.model.ProductAccessProxy;
 import co.edu.poli.corte2.model.ProductRepository;
+import co.edu.poli.corte2.model.SessionManager;
+import co.edu.poli.corte2.model.UserRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +27,10 @@ public class ProductController  implements Initializable{
     Alert mensaje = new Alert(AlertType.INFORMATION);
     Alert error = new Alert(AlertType.ERROR);
     Product producto;
-    ProductAccessProxy pap = new ProductAccessProxy();
+    private UserRepository userRepository;
+    private SessionManager sessionManager;
+    private ProductAccess productAccess;
+    
 
     @FXML
     private TableColumn<Product, Integer> idProducts;
@@ -45,17 +49,22 @@ public class ProductController  implements Initializable{
         int idProducto;
         idProducto = Integer.parseInt(txtIdProduct.getText());
         producto = ProductRepository.getProduct(idProducto);
-        System.out.println("Producto" + producto.getName());
-        String prodDetail = pap.viewProductDetail(producto);
-        mensaje.setContentText(prodDetail);
-        mensaje.show();  
+        String prodDetail = productAccess.viewProductDetail(producto);
+        if (prodDetail.contains("ID")) {
+            mensaje.setContentText(prodDetail);
+            mensaje.show();  
+        }else {
+            error.setContentText(prodDetail);
+            error.show();  
+        }
+        
     }
 
     ObservableList<Product> initialData(){
     
         ObservableList<Product> productList = FXCollections.<Product> observableArrayList();
         try {
-            Map<String, Product> p = ProductRepository.getAllProducts();
+            Map<Integer, Product> p = ProductRepository.getAllProducts();
             productList.addAll(p.values());
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -66,9 +75,15 @@ public class ProductController  implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        productAccess = new ProductAccessProxy(sessionManager.getCurrentUser());
         idProducts.setCellValueFactory(new PropertyValueFactory<Product, Integer>("id"));
         nameProducts.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
         tblProducts.setItems(initialData());  
     } 
 
+    public ProductController() {
+        userRepository = UserRepository.getInstance();
+        sessionManager = SessionManager.getInstance();
+        productAccess = new ProductAccessProxy(sessionManager.getCurrentUser());
+    }
 }

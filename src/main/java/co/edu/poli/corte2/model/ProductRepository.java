@@ -5,14 +5,17 @@ import java.util.Map;
 
 public class ProductRepository {
     
-    private static Map<String, Product> products = new HashMap<>();
+    private static Map<Integer, Product> products = new HashMap<>();
+    private static UserRepository instance;
+    private Map<String, User> users;
 
     static {
-        products.put("1", new Product(1, "Tablet Lenovo", "Tableta con Android", 380000));
-        products.put("2", new Product(2, "SmartPhone Samsung", "Celular gama alta", 4850000));
+        products.put(1, new Product(1, "Tablet Lenovo", "Tableta con Android", 380000));
+        products.put(2, new Product(2, "SmartPhone Samsung", "Celular gama alta", 4850000));
+        products.put(3, new Product(3, "Laptop ASUS", "Laptop de gaming", 3299000));
     }
 
-    public static Map<String, Product> getAllProducts() throws Exception{
+    public static Map<Integer, Product> getAllProducts() throws Exception{
         try {
             return products;
             
@@ -23,7 +26,6 @@ public class ProductRepository {
 
     public static Product getProduct(int id) throws Exception{
         try {
-            Product producto = products.get(id);
             if(products.containsKey(id)){
                 System.out.println("si hay Producto");
                 return products.get(id);
@@ -34,5 +36,12 @@ public class ProductRepository {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public static UserRepository getInstance() {
+        if (instance == null) {
+            instance = new UserRepository();
+        }
+        return instance;
     }
 }

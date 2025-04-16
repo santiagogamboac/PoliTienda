@@ -2,6 +2,7 @@ package co.edu.poli.corte2.controller;
 
 import java.io.IOException;
 
+import co.edu.poli.corte2.model.SessionManager;
 import co.edu.poli.corte2.model.User;
 import co.edu.poli.corte2.model.UserRepository;
 import javafx.event.ActionEvent;
@@ -20,6 +21,11 @@ public class MainController{
 
     Alert mensaje = new Alert(AlertType.INFORMATION);
     Alert error = new Alert(AlertType.ERROR);
+    FXMLLoader loader;
+    VBox productoVBox;
+    UserRepository usuarios = new UserRepository();
+    private UserRepository userRepository;
+    private SessionManager sessionManager;
 
     @FXML
     private Button btnCustomer;
@@ -35,6 +41,9 @@ public class MainController{
     
     @FXML
     private ImageView imgLogin;
+    
+    @FXML
+    private ImageView imgPrincipal;
 
     @FXML
     private PasswordField txtPass;
@@ -47,23 +56,54 @@ public class MainController{
 
     @FXML
     void ValidateUser(ActionEvent event) {
-        UserRepository usuarios = new UserRepository();
-        String clave = txtPass.getText();
-        String user = txtUser.getText();
-        try {
-            User usuarioLogueado = usuarios.getUser(user, clave);
-            if(usuarioLogueado.getRole() != null){
-                txtUser.setVisible(false);
-                txtPass.setVisible(false);
-                btnLogin.setVisible(false);
-                imgLogin.setVisible(true);
-                System.out.println("Rol: " + usuarioLogueado.getRole());
-            }
-        } catch (Exception e) {
-            txtUser.setText("");
-            txtPass.setText("");
-            error.setContentText("Usuario o clave incorrecto");
+        User usuarioLogueado = null;
+        if(txtPass.getText().isEmpty() || txtUser.getText().isEmpty()) {
+            error.setHeaderText("Campos vacíos");
+            error.setContentText("Por favor diligencie los campos");
             error.show();
+        } else {
+            String clave = txtPass.getText();
+            String user = txtUser.getText();
+            try {
+                switch (btnLogin.getText()) {
+                    case "Iniciar Sesión":
+                    usuarioLogueado = usuarios.getUser(user, clave);
+                        if(usuarioLogueado != null){
+                            txtUser.setVisible(false);
+                            txtPass.setVisible(false);
+                            imgLogin.setVisible(true);
+                            btnCustomer.setDisable(false);
+                            btnProduct.setDisable(false);
+                            btnVendor.setDisable(false);
+                            btnLogin.setText("Cerrar Sesión");
+                            sessionManager.setCurrentUser(usuarioLogueado);
+                        }else {
+                            txtUser.setText("");
+                            txtPass.setText("");
+                            error.setHeaderText("Error de Autenticación");
+                            error.setContentText("Usuario o clave incorrecto");
+                            error.show();
+                        }
+                        break;
+                    case "Cerrar Sesión":
+                        vboxPrincipal.getChildren().clear();
+                        txtUser.setText("");
+                        txtPass.setText("");
+                        txtUser.setVisible(true);
+                        txtPass.setVisible(true);
+                        imgLogin.setVisible(false);
+                        btnCustomer.setDisable(true);
+                        btnProduct.setDisable(true);
+                        btnVendor.setDisable(true);
+                        sessionManager.logout();
+                        
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -71,8 +111,8 @@ public class MainController{
     void customerInterface(ActionEvent event) {
         try {
             // Cargar ProductoView.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/poli/corte2/view/CustomerView.fxml"));
-            VBox productoVBox = loader.load();
+            loader = new FXMLLoader(getClass().getResource("/co/edu/poli/corte2/view/CustomerView.fxml"));
+            productoVBox = loader.load();
 
             // Reemplazar el VBox principal
             vboxPrincipal.getChildren().clear(); // Vaciar el contenido actual
@@ -100,7 +140,13 @@ public class MainController{
 
     @FXML
     void vendorInterface(ActionEvent event) {
+        mensaje.setHeaderText("Interface en Construcción");
         mensaje.setContentText("Proximamente");
         mensaje.show();
+    }
+
+    public MainController() {
+        userRepository = UserRepository.getInstance();
+        sessionManager = SessionManager.getInstance();
     }
 }

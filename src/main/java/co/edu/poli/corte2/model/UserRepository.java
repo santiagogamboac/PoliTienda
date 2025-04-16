@@ -6,6 +6,7 @@ import java.util.Map;
 public class UserRepository {
     
     private static Map<String, User> users = new HashMap<>();
+    private static UserRepository instance;
 
     static {
         users.put("admin", new User(1, "admin", "Adm1234", "ADMIN"));
@@ -23,5 +24,12 @@ public class UserRepository {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public static UserRepository getInstance() {
+        if (instance == null) {
+            instance = new UserRepository();
+        }
+        return instance;
     }
 }

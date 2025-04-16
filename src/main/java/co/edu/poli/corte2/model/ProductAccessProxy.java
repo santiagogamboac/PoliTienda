@@ -8,7 +8,12 @@ public class ProductAccessProxy implements ProductAccess {
      * 
      */
     private User user;
-    private ProductAccess realAccess = new ProductAccessImpl();
+    private ProductAccessImpl realAccess;
+
+    public ProductAccessProxy(User user) {
+        this.user = user;
+        this.realAccess = new ProductAccessImpl();
+    }
 
     /**
      * Método que valida el perfil para permitir o no mostrar el detalle del producto
@@ -16,13 +21,12 @@ public class ProductAccessProxy implements ProductAccess {
      * @return
      */
     public String viewProductDetail(Product product) {
-        System.out.println("Producto: " + product.getId());
-        //user = UserRepository.getUser(username, password)
-        if("ADMIN".equalsIgnoreCase(user.getRole())){
+
+        if(user != null && "ADMIN".equalsIgnoreCase(user.getRole())){
             return realAccess.viewProductDetail(product);
         } else {
             // TODO: handle exception
-            return "Este usuario co tiene permisos suficientes";
+            return "Este usuario no tiene permisos suficientes";
         }
     }
 
