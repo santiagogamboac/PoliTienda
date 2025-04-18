@@ -110,17 +110,13 @@ public class MainController {
     @FXML
     void customerInterface(ActionEvent event) {
         try {
-            // Cargar ProductoView.fxml
+            // Cargar CustomerView.fxml
             loader = new FXMLLoader(getClass().getResource("/co/edu/poli/corte2/view/CustomerView.fxml"));
-<<<<<<< HEAD
+
             opcionVBox = loader.load();
-=======
-            productoVBox = loader.load();
             // CustomerController controller = loader.getController();
             // controller.setShopAdminFacade(new ShopAdminFacade());
             // controller.loadCustomerData();
->>>>>>> 62d386240ee477650899184430c6717a42e7d5cf
-
             vboxPrincipal.getChildren().clear(); // Vaciar el contenido actual
             vboxPrincipal.getChildren().add(opcionVBox); // Agregar el nuevo VBox
         } catch (Exception e) {
