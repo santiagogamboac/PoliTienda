@@ -16,8 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-
-public class MainController{
+public class MainController {
 
     Alert mensaje = new Alert(AlertType.INFORMATION);
     Alert error = new Alert(AlertType.ERROR);
@@ -38,10 +37,10 @@ public class MainController{
 
     @FXML
     private Button btnVendor;
-    
+
     @FXML
     private ImageView imgLogin;
-    
+
     @FXML
     private ImageView imgPrincipal;
 
@@ -57,7 +56,7 @@ public class MainController{
     @FXML
     void ValidateUser(ActionEvent event) {
         User usuarioLogueado = null;
-        if(txtPass.getText().isEmpty() || txtUser.getText().isEmpty()) {
+        if (txtPass.getText().isEmpty() || txtUser.getText().isEmpty()) {
             error.setHeaderText("Campos vacíos");
             error.setContentText("Por favor diligencie los campos");
             error.show();
@@ -67,8 +66,8 @@ public class MainController{
             try {
                 switch (btnLogin.getText()) {
                     case "Iniciar Sesión":
-                    usuarioLogueado = usuarios.getUser(user, clave);
-                        if(usuarioLogueado != null){
+                        usuarioLogueado = usuarios.getUser(user, clave);
+                        if (usuarioLogueado != null) {
                             txtUser.setVisible(false);
                             txtPass.setVisible(false);
                             imgLogin.setVisible(true);
@@ -77,7 +76,7 @@ public class MainController{
                             btnVendor.setDisable(false);
                             btnLogin.setText("Cerrar Sesión");
                             sessionManager.setCurrentUser(usuarioLogueado);
-                        }else {
+                        } else {
                             txtUser.setText("");
                             txtPass.setText("");
                             error.setHeaderText("Error de Autenticación");
@@ -96,7 +95,7 @@ public class MainController{
                         btnProduct.setDisable(true);
                         btnVendor.setDisable(true);
                         sessionManager.logout();
-                        
+
                         break;
                     default:
                         throw new AssertionError();
@@ -113,8 +112,10 @@ public class MainController{
             // Cargar ProductoView.fxml
             loader = new FXMLLoader(getClass().getResource("/co/edu/poli/corte2/view/CustomerView.fxml"));
             productoVBox = loader.load();
+            // CustomerController controller = loader.getController();
+            // controller.setShopAdminFacade(new ShopAdminFacade());
+            // controller.loadCustomerData();
 
-            // Reemplazar el VBox principal
             vboxPrincipal.getChildren().clear(); // Vaciar el contenido actual
             vboxPrincipal.getChildren().add(productoVBox); // Agregar el nuevo VBox
         } catch (Exception e) {
@@ -124,7 +125,7 @@ public class MainController{
 
     @FXML
     void productInterface(ActionEvent event) throws IOException {
-       
+
         try {
             // Cargar ProductoView.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/poli/corte2/view/ProductView.fxml"));

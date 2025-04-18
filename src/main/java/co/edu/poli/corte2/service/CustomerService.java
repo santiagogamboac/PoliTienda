@@ -6,16 +6,17 @@ import co.edu.poli.corte2.model.Customer;
 import co.edu.poli.corte2.repositories.interfaces.ICustomerRepository;
 
 /**
- * 
+ *
  */
 public class CustomerService implements ICustomerService {
 
-   private ICustomerRepository customerRepository;
+    private ICustomerRepository customerRepository;
 
     public CustomerService(ICustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
-@Override
+
+    @Override
     public Customer getCustomer(int id) {
         return customerRepository.getById(id);
     }

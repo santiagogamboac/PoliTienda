@@ -1,32 +1,44 @@
 package co.edu.poli.corte2.model;
 
-import java.io.*;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.List;
 
-/**
- * 
- */
 public class Order {
 
-    /**
-     * Default constructor
-     */
-    public Order() {
+    private int orderId;
+    private int customerId;
+    private LocalDate date;
+    private float total;
+    private List<Integer> productIds;
+
+    public Order(int orderId, int customerId, LocalDate date, List<Integer> productIds) {
+        this.orderId = orderId;
+        this.customerId = customerId;
+        this.date = date;
+        this.productIds = productIds;
     }
 
-    /**
-     * 
-     */
-    private int id;
+    public int getOrderId() {
+        return orderId;
+    }
 
-    /**
-     * 
-     */
-    private int customerId;
+    public int CustomerId() {
+        return customerId;
+    }
 
-    /**
-     * 
-     */
-    private float total;
+    public LocalDate getDate() {
+        return date;
+    }
 
+    public float getTotal() {
+        return total;
+    }
+
+    public List<Integer> getProductIds() {
+        return productIds;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
 }

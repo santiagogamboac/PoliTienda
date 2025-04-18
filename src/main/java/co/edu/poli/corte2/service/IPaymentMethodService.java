@@ -5,25 +5,17 @@ import java.util.List;
 import co.edu.poli.corte2.model.PaymentMethod;
 
 /**
- * 
+ *
  */
 public interface IPaymentMethodService {
 
     /**
      * @return
      */
-    public List<PaymentMethod> getPaymenthMethods();
+    public List<PaymentMethod> getPaymentMethods();
 
-    /**
-     * @param id 
-     * @return
-     */
-    public String activatePaymentMethod(int id);
+    public void toggleStatus(int id);
 
-    /**
-     * @param id 
-     * @return
-     */
-    public String blockPaymentMethod(int id);
+    public List<PaymentMethod> getPaymentMethodsByCustomerId(int id);
 
 }

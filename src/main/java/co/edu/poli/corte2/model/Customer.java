@@ -1,5 +1,7 @@
 package co.edu.poli.corte2.model;
 
+import java.util.List;
+
 /**
  *
  */
@@ -18,6 +20,7 @@ public class Customer {
     private String name;
 
     private String email;
+    private List<PaymentMethod> paymentMethods;
 
     public int getId() {
         return id;
@@ -31,6 +34,10 @@ public class Customer {
         return email;
     }
 
+    public List<PaymentMethod> getPaymentMethods() {
+        return paymentMethods;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -42,5 +49,9 @@ public class Customer {
     // Getter y Setter para email
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPaymentMethods(List<PaymentMethod> paymentMethods) {
+        this.paymentMethods = paymentMethods;
     }
 }

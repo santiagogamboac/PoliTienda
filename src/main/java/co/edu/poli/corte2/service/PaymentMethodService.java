@@ -3,27 +3,32 @@ package co.edu.poli.corte2.service;
 import java.util.List;
 
 import co.edu.poli.corte2.model.PaymentMethod;
+import co.edu.poli.corte2.repositories.interfaces.IPaymentMethodRepository;
 
 /**
- * 
+ *
  */
-public class PaymentMethodService implements  IPaymentMethodService {
+public class PaymentMethodService implements IPaymentMethodService {
 
-    /**
-     * Default constructor
-     */
-    public PaymentMethodService() {
+    private IPaymentMethodRepository repository;
+
+    public PaymentMethodService(IPaymentMethodRepository repository) {
+        this.repository = repository;
     }
- public List<PaymentMethod> getPaymenthMethods(){
-    return null;
- }
 
-    public String activatePaymentMethod(int id){
-        // TODO implement here
+    public List<PaymentMethod> getPaymentMethods() {
         return null;
     }
 
-    public String blockPaymentMethod(int id){
-        return null;
+    public void toggleStatus(int id) {
+        PaymentMethod method = repository.getById(id);
+        method.setActive(!method.isActive());
+        repository.update(method);
+    }
+
+    @Override
+    public List<PaymentMethod> getPaymentMethodsByCustomerId(int customerId) {
+        return repository.getByCustomerId(customerId);
+
     }
 }
