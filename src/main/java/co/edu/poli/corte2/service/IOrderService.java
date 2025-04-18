@@ -1,20 +1,16 @@
 package co.edu.poli.corte2.service;
 
+import java.util.List;
+
 import co.edu.poli.corte2.model.Order;
 
-import java.io.*;
-import java.util.*;
-
-/**
- * 
- */
 public interface IOrderService {
 
     /**
-     * @param id 
+     * @param id
      * @return
      */
-    public Order getOrder(int id);
+    public List<Order> getOrdersByCustomerId(int id);
 
     /**
      * @return
@@ -22,7 +18,7 @@ public interface IOrderService {
     public List<Order> getAllOrders();
 
     /**
-     * @param id 
+     * @param id
      * @return
      */
     public String processOrder(int id);
