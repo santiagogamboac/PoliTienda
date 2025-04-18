@@ -22,7 +22,7 @@ public class MainController{
     Alert mensaje = new Alert(AlertType.INFORMATION);
     Alert error = new Alert(AlertType.ERROR);
     FXMLLoader loader;
-    VBox productoVBox;
+    VBox opcionVBox;
     UserRepository usuarios = new UserRepository();
     private UserRepository userRepository;
     private SessionManager sessionManager;
@@ -89,6 +89,7 @@ public class MainController{
                         vboxPrincipal.getChildren().clear();
                         txtUser.setText("");
                         txtPass.setText("");
+                        btnLogin.setText("Iniciar Sesión");
                         txtUser.setVisible(true);
                         txtPass.setVisible(true);
                         imgLogin.setVisible(false);
@@ -112,11 +113,11 @@ public class MainController{
         try {
             // Cargar ProductoView.fxml
             loader = new FXMLLoader(getClass().getResource("/co/edu/poli/corte2/view/CustomerView.fxml"));
-            productoVBox = loader.load();
+            opcionVBox = loader.load();
 
             // Reemplazar el VBox principal
             vboxPrincipal.getChildren().clear(); // Vaciar el contenido actual
-            vboxPrincipal.getChildren().add(productoVBox); // Agregar el nuevo VBox
+            vboxPrincipal.getChildren().add(opcionVBox); // Agregar el nuevo VBox
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -127,12 +128,12 @@ public class MainController{
        
         try {
             // Cargar ProductoView.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/poli/corte2/view/ProductView.fxml"));
-            VBox productoVBox = loader.load();
+            loader = new FXMLLoader(getClass().getResource("/co/edu/poli/corte2/view/ProductView.fxml"));
+            opcionVBox = loader.load();
 
             // Reemplazar el VBox principal
             vboxPrincipal.getChildren().clear(); // Vaciar el contenido actual
-            vboxPrincipal.getChildren().add(productoVBox); // Agregar el nuevo VBox
+            vboxPrincipal.getChildren().add(opcionVBox); // Agregar el nuevo VBox
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -140,9 +141,17 @@ public class MainController{
 
     @FXML
     void vendorInterface(ActionEvent event) {
-        mensaje.setHeaderText("Interface en Construcción");
-        mensaje.setContentText("Proximamente");
-        mensaje.show();
+        try {
+            // Cargar ProductoView.fxml
+            loader = new FXMLLoader(getClass().getResource("/co/edu/poli/corte2/view/SupplierView.fxml"));
+            opcionVBox = loader.load();
+
+            // Reemplazar el VBox principal
+            vboxPrincipal.getChildren().clear(); // Vaciar el contenido actual
+            vboxPrincipal.getChildren().add(opcionVBox); // Agregar el nuevo VBox
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public MainController() {
