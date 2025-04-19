@@ -2,31 +2,25 @@
     {
         "id": 1,
         "userName": "admin",
-        "password": "Adm1234",
+        "password": "0qf+rWMUg002+ofLv7fxxQ==",
         "role": "ADMIN"
     },
     {
         "id": 2,
         "userName": "juan",
-        "password": "soyjuan",
+        "password": "4pgxYjpoborqAgAiubh3/Q==",
         "role": "USER"
     },
     {
         "id": 101,
         "userName": "Alice",
-        "password": "password123",
+        "password": "LDx9hLvYv/7DnDf1assCxg==",
         "role": "ADMIN"
     },
     {
         "id": 102,
         "userName": "Bob",
-        "password": "securepass",
-        "role": "ADMIN"
-    },
-    {
-        "id": 101,
-        "userName": "Alice",
-        "password": "password123",
+        "password": "Qje595dkvQ+rfoDp5W0f2w==",
         "role": "ADMIN"
     }
 ]

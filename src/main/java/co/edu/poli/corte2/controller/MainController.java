@@ -66,7 +66,7 @@ public class MainController {
             try {
                 switch (btnLogin.getText()) {
                     case "Iniciar Sesión":
-                        usuarioLogueado = userRepository.getUser(user, clave);
+                    usuarioLogueado = userRepository.getUser(user, SessionManager.encrypt(clave));
                         if (usuarioLogueado != null) {
                             txtUser.setVisible(false);
                             txtPass.setVisible(false);
