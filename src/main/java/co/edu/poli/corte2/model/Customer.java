@@ -11,7 +11,7 @@ public class Customer {
     private String name;
     private String email;
     private User user;
-    private List<PaymentMethod> paymentMethods;
+    private List<PaymentMethodStatus> paymentMethodStatuses;
 
     public Customer() {
     }
@@ -21,7 +21,7 @@ public class Customer {
         this.name = name;
         this.email = email;
         this.user = user;
-        this.paymentMethods = paymentMethods;
+        this.paymentMethodStatuses = paymentMethodStatuses;
     }
 
     public int getId() {
@@ -48,18 +48,12 @@ public class Customer {
         this.email = email;
     }
 
-    public List<PaymentMethod> getPaymentMethods() {
-        return paymentMethods;
+    public List<PaymentMethodStatus> getPaymentMethodStatuses() {
+        return paymentMethodStatuses;
     }
 
-    public List<Integer> getPaymentMethodIds() {
-        return paymentMethods.stream()
-                .map(PaymentMethod::getId)
-                .collect(java.util.stream.Collectors.toList());
-    }
-
-    public void setPaymentMethods(List<PaymentMethod> paymentMethods) {
-        this.paymentMethods = paymentMethods;
+    public void setPaymentMethodStatuses(List<PaymentMethodStatus> paymentMethodStatuses) {
+        this.paymentMethodStatuses = paymentMethodStatuses;
     }
 
     public User getUser() {

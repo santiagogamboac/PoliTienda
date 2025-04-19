@@ -3,6 +3,7 @@ package co.edu.poli.corte2.service;
 import java.util.List;
 
 import co.edu.poli.corte2.model.Customer;
+import co.edu.poli.corte2.model.PaymentMethod;
 import co.edu.poli.corte2.repositories.interfaces.ICustomerRepository;
 
 /**
@@ -34,5 +35,10 @@ public class CustomerService implements ICustomerService {
     @Override
     public void updateCustomer(int id, Customer data) {
         customerRepository.update(id, data);
+    }
+
+    @Override
+    public List<PaymentMethod> togglePaymentMethodStatus(int customerId, int paymentMethodId) {
+        return customerRepository.togglePaymentMethodStatus(customerId, paymentMethodId);
     }
 }

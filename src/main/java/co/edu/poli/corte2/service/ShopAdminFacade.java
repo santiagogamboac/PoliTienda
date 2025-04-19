@@ -6,6 +6,7 @@ import java.util.List;
 import co.edu.poli.corte2.model.Customer;
 import co.edu.poli.corte2.model.Order;
 import co.edu.poli.corte2.model.PaymentMethod;
+import co.edu.poli.corte2.model.PaymentMethodStatus;
 
 public class ShopAdminFacade {
 
@@ -33,28 +34,25 @@ public class ShopAdminFacade {
         return orderService.getOrdersByCustomerId(customerId);
     }
 
-    public void togglePaymentMethodStatus(int customerId, int paymentMethodId) {
-        paymentMethodService.toggleStatus(customerId, paymentMethodId);
+    public List<PaymentMethod> togglePaymentMethodStatus(int customerId, int paymentMethodId) {
+        return customerService.togglePaymentMethodStatus(customerId, paymentMethodId);
     }
 
-    public List<PaymentMethod> getPaymentMethodsByCustomerId(int id) {
+    public List<PaymentMethod> getPaymentMethodsForTable(int customerId) {
+        Customer customer = customerService.getCustomer(customerId);
+        List<PaymentMethod> paymentMethods = new ArrayList<>();
 
-        Customer customer = customerService.getCustomer(id);
-        List<PaymentMethod> fullMethods = new ArrayList<>();
-        if (customer != null && customer.getPaymentMethods() != null) {
-
-            for (PaymentMethod pm : customer.getPaymentMethods()) {
-                // Busca el PaymentMethod completo por ID
-                PaymentMethod fullMethod = paymentMethodService.findById(pm.getId());
-                if (fullMethod != null) {
-                    // Agregar el nombre del PaymentMethod completo al que ya tiene el cliente
-                    pm.setType(fullMethod.getType()); // Suponiendo que el PaymentMethod tiene un setName()
-                    fullMethods.add(pm);
+        if (customer != null && customer.getPaymentMethodStatuses() != null) {
+            for (PaymentMethodStatus status : customer.getPaymentMethodStatuses()) {
+                PaymentMethod paymentMethod = paymentMethodService.findById(status.getId());
+                if (paymentMethod != null) {
+                    paymentMethod.setActive(status.isActive()); // Combina el estado con el método de pago
+                    paymentMethods.add(paymentMethod);
                 }
             }
         }
 
-        return fullMethods;
+        return paymentMethods;
     }
 
 }
