@@ -1,14 +1,14 @@
 [
     {
         "id": 1,
-        "type": "Credit Card"
+        "name": "Credit Card"
     },
     {
         "id": 2,
-        "type": "PayPal"
+        "name": "PayPal"
     },
     {
         "id": 3,
-        "type": "Debit Card"
+        "name": "Debit Card"
     }
 ]

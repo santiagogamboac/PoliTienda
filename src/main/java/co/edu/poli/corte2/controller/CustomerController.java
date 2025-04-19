@@ -13,7 +13,6 @@ import co.edu.poli.corte2.repositories.implementations.CustomerRepository;
 import co.edu.poli.corte2.repositories.implementations.OrderRepository;
 import co.edu.poli.corte2.repositories.implementations.PaymentMethodRepository;
 import co.edu.poli.corte2.repositories.implementations.ProductRepository;
-import co.edu.poli.corte2.repositories.interfaces.ICustomerRepository;
 import co.edu.poli.corte2.repositories.interfaces.IOrderRepository;
 import co.edu.poli.corte2.repositories.interfaces.IPaymentMethodRepository;
 import co.edu.poli.corte2.service.CustomerService;
@@ -98,12 +97,14 @@ public class CustomerController implements Initializable {
             String nuevoNombre = TxtNombre.getText();
             String nuevoEmail = TxtEmail.getText();
 
+            List<PaymentMethod> paymentMethods = shopAdminFacade.getPaymentMethodsForTable(id);
+
             Customer actualizado = new Customer(
                     id,
                     nuevoNombre,
                     nuevoEmail,
-                    selected.getUser(), // dejamos el mismo user
-                    selected.getPaymentMethods() // dejamos los mismos métodos de pago
+                    selected.getUser(), // keep the same user
+                    paymentMethods // use the retrieved payment methods
             );
             shopAdminFacade.updateCustomer(id, actualizado);
 
@@ -153,7 +154,7 @@ public class CustomerController implements Initializable {
                 treeViewOrder.getRoot().getChildren().add(orderItem);
             }
 
-            List<PaymentMethod> methods = shopAdminFacade.getPaymentMethodsByCustomerId(customerId);
+            List<PaymentMethod> methods = shopAdminFacade.getPaymentMethodsForTable(customerId);
 
             ObservableList<PaymentMethod> observableMethods = FXCollections.observableArrayList(methods);
             
@@ -166,7 +167,7 @@ public class CustomerController implements Initializable {
     public void initialize(URL location, ResourceBundle resources
     ) {
 
-        colMetodo.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colMetodo.setCellValueFactory(new PropertyValueFactory<>("name"));
         colStatus.setCellValueFactory(cellData -> {
             boolean isActive = cellData.getValue().isActive(); // o getActive() según tu clase
             String estado = isActive ? "Activado" : "Bloqueado";
@@ -181,11 +182,10 @@ public class CustomerController implements Initializable {
                     PaymentMethod paymentMethod = getTableView().getItems().get(getIndex());
                     Customer selectedCustomer = tblCustomer.getSelectionModel().getSelectedItem();
                     if (selectedCustomer != null) {
-                        int customerId = selectedCustomer.getId(); // Obtener el customerId
-                        // Llamamos al facade con el customerId y el paymentMethodId
-                        shopAdminFacade.togglePaymentMethodStatus(customerId, paymentMethod.getId());
+                        int customerId = selectedCustomer.getId();
 
-                        List<PaymentMethod> updatedMethods = shopAdminFacade.getPaymentMethodsByCustomerId(customerId);
+                        shopAdminFacade.togglePaymentMethodStatus(customerId, paymentMethod.getId());
+                        List<PaymentMethod> updatedMethods = shopAdminFacade.getPaymentMethodsForTable(customerId);
                         ObservableList<PaymentMethod> updatedObservable = FXCollections.observableArrayList(updatedMethods);
                         tablePaymentMethods.setItems(null); // Limpieza opcional
                         tablePaymentMethods.setItems(updatedObservable);// Refrescar para mostrar el nuevo estado
@@ -208,11 +208,7 @@ public class CustomerController implements Initializable {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        // if (customerService == null) {
-        //     ICustomerRepository customerRepository = new CustomerRepository();
-        //     customerRepository.seedData();
-        //     customerService = new CustomerService(customerRepository);
-        // }
+
         loadCustomerData();
 
     }
@@ -224,14 +220,13 @@ public class CustomerController implements Initializable {
     public void loadCustomerData() {
         if (shopAdminFacade == null) {
 
-            ICustomerRepository customerRepository = new CustomerRepository();
-            IOrderRepository orderRepository = new OrderRepository();
-            IPaymentMethodRepository paymentMethodRepository = new PaymentMethodRepository(); // Supón que esta clase existe
-
+            IPaymentMethodRepository paymentMethodRepository = new PaymentMethodRepository();
+            CustomerRepository customerRepository = new CustomerRepository();
             ICustomerService customerService = new CustomerService(customerRepository);
+            IPaymentMethodService paymentMethodService = new PaymentMethodService(customerService, paymentMethodRepository);
+            customerRepository.setPaymentMethodService((PaymentMethodService) paymentMethodService);
+            IOrderRepository orderRepository = new OrderRepository();
             IOrderService orderService = new OrderService(orderRepository);
-            IPaymentMethodService paymentMethodService = new PaymentMethodService(customerService, paymentMethodRepository); // Supón que esta clase existe
-
             shopAdminFacade = new ShopAdminFacade(customerService, orderService, paymentMethodService);
         }
 

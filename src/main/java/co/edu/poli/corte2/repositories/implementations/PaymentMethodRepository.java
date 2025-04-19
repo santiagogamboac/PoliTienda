@@ -2,6 +2,7 @@ package co.edu.poli.corte2.repositories.implementations;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import co.edu.poli.corte2.model.Customer;
 import co.edu.poli.corte2.model.PaymentMethod;
+import co.edu.poli.corte2.model.PaymentMethodStatus;
 import co.edu.poli.corte2.repositories.interfaces.IPaymentMethodRepository;
 
 public class PaymentMethodRepository implements IPaymentMethodRepository {
@@ -85,26 +87,46 @@ public class PaymentMethodRepository implements IPaymentMethodRepository {
     }
 
     @Override
-    public void updatePaymentMethodStatus(int customerId, int paymentMethodId) {
+    public List<PaymentMethod> updatePaymentMethodStatus(int customerId, int paymentMethodId) {
         Customer customer = customers.get(customerId);
-
+        List<PaymentMethod> paymentMethodDTOs = new ArrayList<>();
         if (customer != null) {
-            List<PaymentMethod> methods = customer.getPaymentMethods();
+            List<PaymentMethodStatus> statuses = customer.getPaymentMethodStatuses();
 
-            PaymentMethod targetMethod = methods.stream()
-                    .filter(pm -> pm.getId() == paymentMethodId)
+            PaymentMethodStatus targetStatus = statuses.stream()
+                    .filter(status -> status.getId() == paymentMethodId)
                     .findFirst()
                     .orElse(null);
 
-            if (targetMethod != null) {
-                targetMethod.setActive(!targetMethod.isActive());
+            if (targetStatus != null) {
+                targetStatus.setActive(!targetStatus.isActive());
                 saveCustomerData();
-                System.out.println("Estado actualizado para método ID " + paymentMethodId + " del cliente ID " + customerId);
+                return getPaymentMethodsForTable(customerId);
+                //System.out.println("Estado actualizado para método ID " + paymentMethodId + " del cliente ID " + customerId);
             } else {
                 System.out.println("Método de pago no encontrado en el cliente.");
             }
-        } else {
-            System.out.println("Cliente no encontrado.");
         }
+        return paymentMethodDTOs;
+    }
+
+    public List<PaymentMethod> getPaymentMethodsForTable(int customerId) {
+        Customer customer = customers.get(customerId);
+        List<PaymentMethod> paymentMethodDTOs = new ArrayList<>();
+
+        if (customer != null && customer.getPaymentMethodStatuses() != null) {
+            for (PaymentMethodStatus status : customer.getPaymentMethodStatuses()) {
+                PaymentMethod fullMethod = paymentMethods.get(status.getId());
+                if (fullMethod != null) {
+                    paymentMethodDTOs.add(new PaymentMethod(
+                            fullMethod.getId(),
+                            fullMethod.getName(), // Nombre del método de pago
+                            status.isActive()
+                    ));
+                }
+            }
+        }
+
+        return paymentMethodDTOs;
     }
 }

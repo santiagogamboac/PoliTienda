@@ -7,7 +7,7 @@ public class PaymentMethod {
 
     private int id;
 
-    private String type;
+    private String name;
 
     private Boolean active;
 
@@ -15,9 +15,9 @@ public class PaymentMethod {
 
     }
 
-    public PaymentMethod(int id, String type, Boolean active) {
+    public PaymentMethod(int id, String name, Boolean active) {
         this.id = id;
-        this.type = type;
+        this.name = name;
         this.active = active;
     }
 
@@ -35,12 +35,12 @@ public class PaymentMethod {
     /**
      * @return the type
      */
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isActive() {
