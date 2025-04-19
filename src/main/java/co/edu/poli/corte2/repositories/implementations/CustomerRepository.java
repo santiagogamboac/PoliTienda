@@ -1,5 +1,10 @@
 package co.edu.poli.corte2.repositories.implementations;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,22 +16,36 @@ import co.edu.poli.corte2.repositories.interfaces.ICustomerRepository;
 
 public class CustomerRepository implements ICustomerRepository {
 
-    private Map<Integer, Customer> database = new HashMap<>();
+    private static final String FILE_PATH = "src/main/resources/customers.json";
+    private List<Customer> customers = new ArrayList<>();
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    public CustomerRepository() {
+        loadFromFile();
+    }
 
     @Override
     public Customer getById(int id) {
-        return database.get(id);
+        return customers.stream()
+                .filter(customer -> customer.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public List<Customer> getAll() {
-        return new ArrayList<>(database.values());
+        return customers;
     }
 
     @Override
-    public Customer update(int id, Customer updatedCustomer) {
-        database.put(id, updatedCustomer); // simula actualización
-        return updatedCustomer;
+    public void update(int id, Customer customer) {
+        for (int i = 0; i < customers.size(); i++) {
+            if (customers.get(i).getId() == customer.getId()) {
+                customers.set(i, customer);
+                saveToFile();
+                return;
+            }
+        }
     }
 
     @Override
@@ -35,22 +54,24 @@ public class CustomerRepository implements ICustomerRepository {
         return data;
     }
 
-    @Override
-    public void seedData() {
-
-        List<PaymentMethod> alicePaymentMethods = List.of(
-                new PaymentMethod(1, "Tarjeta de Crédito", true),
-                new PaymentMethod(2, "PayPal", true)
-        );
-
-        List<PaymentMethod> bobPaymentMethods = List.of(
-                new PaymentMethod(3, "Efectivo", true)
-        );
-
-        database.put(1, new Customer(1, "Alice", "alice@email.com"));
-        database.get(1).setPaymentMethods(alicePaymentMethods);
-
-        database.put(2, new Customer(2, "Bob", "bob@email.com"));
-        database.get(2).setPaymentMethods(bobPaymentMethods);
+    private void saveToFile() {
+        try {
+            objectMapper.writeValue(new File(FILE_PATH), customers);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    private void loadFromFile() {
+        try {
+            File file = new File(FILE_PATH);
+            if (file.exists()) {
+                customers = objectMapper.readValue(file, new TypeReference<List<Customer>>() {
+                });
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

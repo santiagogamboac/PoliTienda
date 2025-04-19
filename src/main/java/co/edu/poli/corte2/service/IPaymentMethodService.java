@@ -14,8 +14,8 @@ public interface IPaymentMethodService {
      */
     public List<PaymentMethod> getPaymentMethods();
 
-    public void toggleStatus(int id);
+    PaymentMethod findById(int id);
 
-    public List<PaymentMethod> getPaymentMethodsByCustomerId(int id);
+    public void toggleStatus(int customerId, int paymentMethodId);
 
 }

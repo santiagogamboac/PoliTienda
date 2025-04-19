@@ -3,16 +3,15 @@ package co.edu.poli.corte2.repositories.interfaces;
 import java.util.Collection;
 import java.util.List;
 
+import co.edu.poli.corte2.model.Customer;
 import co.edu.poli.corte2.model.PaymentMethod;
 
 public interface IPaymentMethodRepository {
 
-    Collection<PaymentMethod> getAll();
+    List<PaymentMethod> getAll();  // Obtiene todos los métodos de pago
 
-    PaymentMethod getById(int id);
+    public PaymentMethod findById(int id);
 
-    void update(PaymentMethod method);
-
-    List<PaymentMethod> getByCustomerId(int customerId);
+    void updatePaymentMethodStatus(int customerId, int paymentMethodId);
 
 }

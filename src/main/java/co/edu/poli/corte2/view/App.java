@@ -21,6 +21,7 @@ public class App extends Application {
         scene = new Scene(ap);
         stage.setScene(scene);
         stage.setTitle("Portal negocio");
+        stage.setMaximized(true);
         stage.show();
     }
 

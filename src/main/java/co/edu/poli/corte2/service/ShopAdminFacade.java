@@ -1,5 +1,6 @@
 package co.edu.poli.corte2.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.poli.corte2.model.Customer;
@@ -24,20 +25,36 @@ public class ShopAdminFacade {
         return customerService.getAllCustomer();
     }
 
-    public Customer updateCustomer(int id, Customer updatedCustomer) {
-        return customerService.updateCustomer(id, updatedCustomer);
+    public void updateCustomer(int id, Customer updatedCustomer) {
+        customerService.updateCustomer(id, updatedCustomer);
     }
 
     public List<Order> getOrdersByCustomerId(int customerId) {
         return orderService.getOrdersByCustomerId(customerId);
     }
 
-    public void togglePaymentMethodStatus(int id) {
-        paymentMethodService.toggleStatus(id);
+    public void togglePaymentMethodStatus(int customerId, int paymentMethodId) {
+        paymentMethodService.toggleStatus(customerId, paymentMethodId);
     }
 
     public List<PaymentMethod> getPaymentMethodsByCustomerId(int id) {
-        return paymentMethodService.getPaymentMethodsByCustomerId(id);
+
+        Customer customer = customerService.getCustomer(id);
+        List<PaymentMethod> fullMethods = new ArrayList<>();
+        if (customer != null && customer.getPaymentMethods() != null) {
+
+            for (PaymentMethod pm : customer.getPaymentMethods()) {
+                // Busca el PaymentMethod completo por ID
+                PaymentMethod fullMethod = paymentMethodService.findById(pm.getId());
+                if (fullMethod != null) {
+                    // Agregar el nombre del PaymentMethod completo al que ya tiene el cliente
+                    pm.setType(fullMethod.getType()); // Suponiendo que el PaymentMethod tiene un setName()
+                    fullMethods.add(pm);
+                }
+            }
+        }
+
+        return fullMethods;
     }
 
 }

@@ -5,12 +5,12 @@ import java.util.List;
 import co.edu.poli.corte2.model.Customer;
 
 /**
- * 
+ *
  */
 public interface ICustomerService {
 
     /**
-     * @param id 
+     * @param id
      * @return
      */
     public Customer getCustomer(int id);
@@ -21,21 +21,19 @@ public interface ICustomerService {
     public List<Customer> getAllCustomer();
 
     /**
-     * @param data 
+     * @param data
      * @return
      */
     public Customer createCustomer(Customer data);
 
     /**
-     * @param id 
-     * @param data 
+     * @param id
+     * @param data
      * @return
      */
-    public Customer updateCustomer(int id, Customer data);
+    public void updateCustomer(int id, Customer data);
 
     /**
-     * 
+     *
      */
-    
-
 }

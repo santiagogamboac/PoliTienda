@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "Alice",
+        "email": "alice@example.com",
+        "user": {
+            "id": 101,
+            "userName": "Alice",
+            "password": "password123",
+            "role": "ADMIN"
+        },
+        "paymentMethods": [
+            {
+                "id": 1,
+                "type": null,
+                "active": true
+            },
+            {
+                "id": 2,
+                "type": null,
+                "active": true
+            }
+        ],
+        "paymentMethodIds": [
+            1,
+            2
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Bob",
+        "email": "bob@example.com",
+        "user": {
+            "id": 102,
+            "userName": "Bob",
+            "password": "securepass",
+            "role": "ADMIN"
+        },
+        "paymentMethods": [
+            {
+                "id": 3,
+                "type": null,
+                "active": true
+            }
+        ],
+        "paymentMethodIds": [
+            3
+        ]
+    }
+]

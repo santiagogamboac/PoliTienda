@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "type": "Credit Card"
+    },
+    {
+        "id": 2,
+        "type": "PayPal"
+    },
+    {
+        "id": 3,
+        "type": "Debit Card"
+    }
+]

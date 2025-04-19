@@ -11,6 +11,10 @@ public class PaymentMethod {
 
     private Boolean active;
 
+    public PaymentMethod() {
+
+    }
+
     public PaymentMethod(int id, String type, Boolean active) {
         this.id = id;
         this.type = type;

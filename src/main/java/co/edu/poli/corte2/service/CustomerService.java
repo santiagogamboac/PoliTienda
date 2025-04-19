@@ -32,7 +32,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Customer updateCustomer(int id, Customer data) {
-        return customerRepository.update(id, data);
+    public void updateCustomer(int id, Customer data) {
+        customerRepository.update(id, data);
     }
 }

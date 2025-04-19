@@ -3,6 +3,7 @@ module co.edu.poli {
     requires javafx.fxml;
     requires javafx.graphics;
     requires javafx.base;
+    requires com.fasterxml.jackson.databind;
 
     opens co.edu.poli.corte2.controller to javafx.fxml;
     opens co.edu.poli.corte2.view to javafx.fxml;
