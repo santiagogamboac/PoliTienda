@@ -9,10 +9,10 @@ import co.edu.poli.corte2.model.Customer;
 import co.edu.poli.corte2.model.Order;
 import co.edu.poli.corte2.model.PaymentMethod;
 import co.edu.poli.corte2.model.Product;
-import co.edu.poli.corte2.model.ProductRepository;
 import co.edu.poli.corte2.repositories.implementations.CustomerRepository;
 import co.edu.poli.corte2.repositories.implementations.OrderRepository;
 import co.edu.poli.corte2.repositories.implementations.PaymentMethodRepository;
+import co.edu.poli.corte2.repositories.implementations.ProductRepository;
 import co.edu.poli.corte2.repositories.interfaces.ICustomerRepository;
 import co.edu.poli.corte2.repositories.interfaces.IOrderRepository;
 import co.edu.poli.corte2.repositories.interfaces.IPaymentMethodRepository;
@@ -82,6 +82,7 @@ public class CustomerController implements Initializable {
     }
     private ICustomerService customerService;
     private ObservableList<Customer> customerData;
+    private ProductRepository pr = new ProductRepository();
 
     private ShopAdminFacade shopAdminFacade;
 
@@ -136,7 +137,7 @@ public class CustomerController implements Initializable {
                 // Obtener los productos del pedido
                 List<Product> products = new ArrayList<>();
                 for (int productId : order.getProductIds()) {
-                    Product product = ProductRepository.getProduct(productId);
+                    Product product = pr.getProduct(productId);
                     if (product != null) {
                         products.add(product);
                     }
@@ -155,9 +156,7 @@ public class CustomerController implements Initializable {
             List<PaymentMethod> methods = shopAdminFacade.getPaymentMethodsByCustomerId(customerId);
 
             ObservableList<PaymentMethod> observableMethods = FXCollections.observableArrayList(methods);
-            tablePaymentMethods.setItems(observableMethods);
-
-            tablePaymentMethods.setItems(null);
+            
             tablePaymentMethods.setItems(observableMethods);
 
         }

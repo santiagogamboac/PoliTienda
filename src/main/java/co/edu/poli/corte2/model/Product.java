@@ -45,8 +45,8 @@ public class Product {
         return description;
     }
 
-    public void setDescription(String descripción) {
-        this.description = descripción;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getPrice() {
@@ -57,11 +57,13 @@ public class Product {
         this.price = price;
     }
 
-    public Product(int id, String name, String descripción, double price) {
-        this.id = id;
-        this.name = name;
-        this.description = descripción;
-        this.price = price;
+    public Product() {
     }
 
+    public Product(int id, String name, String description, double price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 }

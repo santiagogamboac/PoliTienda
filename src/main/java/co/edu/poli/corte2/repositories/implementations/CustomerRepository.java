@@ -6,12 +6,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import co.edu.poli.corte2.model.Customer;
-import co.edu.poli.corte2.model.PaymentMethod;
 import co.edu.poli.corte2.repositories.interfaces.ICustomerRepository;
 
 public class CustomerRepository implements ICustomerRepository {

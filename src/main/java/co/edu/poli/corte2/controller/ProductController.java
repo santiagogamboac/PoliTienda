@@ -1,15 +1,15 @@
 package co.edu.poli.corte2.controller;
 
 import java.net.URL;
-import java.util.Map;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import co.edu.poli.corte2.model.Product;
 import co.edu.poli.corte2.model.ProductAccess;
 import co.edu.poli.corte2.model.ProductAccessProxy;
-import co.edu.poli.corte2.model.ProductRepository;
 import co.edu.poli.corte2.model.SessionManager;
-import co.edu.poli.corte2.model.UserRepository;
+import co.edu.poli.corte2.repositories.implementations.ProductRepository;
+import co.edu.poli.corte2.repositories.implementations.UserRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +27,8 @@ public class ProductController  implements Initializable{
     Alert mensaje = new Alert(AlertType.INFORMATION);
     Alert error = new Alert(AlertType.ERROR);
     Product producto;
+    private UserRepository ur = new UserRepository();
+    private ProductRepository pr = new ProductRepository();
     private UserRepository userRepository;
     private SessionManager sessionManager;
     private ProductAccess productAccess;
@@ -48,7 +50,7 @@ public class ProductController  implements Initializable{
     void productDetails(ActionEvent event) throws Exception {
         int idProducto;
         idProducto = Integer.parseInt(txtIdProduct.getText());
-        producto = ProductRepository.getProduct(idProducto);
+        producto = pr.getProduct(idProducto);
         String prodDetail = productAccess.viewProductDetail(producto);
         if (prodDetail.contains("ID")) {
             mensaje.setContentText(prodDetail);
@@ -62,28 +64,32 @@ public class ProductController  implements Initializable{
 
     ObservableList<Product> initialData(){
     
-        ObservableList<Product> productList = FXCollections.<Product> observableArrayList();
+        List<Product> p;
         try {
-            Map<Integer, Product> p = ProductRepository.getAllProducts();
-            productList.addAll(p.values());
+            p = pr.getAllProducts();
+            ObservableList<Product> productList = FXCollections.<Product> observableArrayList(p);
+            return productList;
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            return null;
         }
-        return productList;
+        
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
+        sessionManager = SessionManager.getInstance();
+        System.out.println("Usuario actual: " + sessionManager.getCurrentUser());
         productAccess = new ProductAccessProxy(sessionManager.getCurrentUser());
-        idProducts.setCellValueFactory(new PropertyValueFactory<Product, Integer>("id"));
-        nameProducts.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+
+        idProducts.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameProducts.setCellValueFactory(new PropertyValueFactory<>("name"));
         tblProducts.setItems(initialData());  
     } 
 
     public ProductController() {
-        userRepository = UserRepository.getInstance();
-        sessionManager = SessionManager.getInstance();
-        productAccess = new ProductAccessProxy(sessionManager.getCurrentUser());
+        userRepository = ur.getInstance();
     }
 }

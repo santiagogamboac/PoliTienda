@@ -4,7 +4,8 @@ import java.io.IOException;
 
 import co.edu.poli.corte2.model.SessionManager;
 import co.edu.poli.corte2.model.User;
-import co.edu.poli.corte2.model.UserRepository;
+import co.edu.poli.corte2.repositories.implementations.UserRepository;
+import co.edu.poli.corte2.repositories.interfaces.IUserRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +23,7 @@ public class MainController {
     Alert error = new Alert(AlertType.ERROR);
     FXMLLoader loader;
     VBox opcionVBox;
-    UserRepository usuarios = new UserRepository();
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
     private SessionManager sessionManager;
 
     @FXML
@@ -66,7 +66,7 @@ public class MainController {
             try {
                 switch (btnLogin.getText()) {
                     case "Iniciar Sesión":
-                        usuarioLogueado = usuarios.getUser(user, clave);
+                        usuarioLogueado = userRepository.getUser(user, clave);
                         if (usuarioLogueado != null) {
                             txtUser.setVisible(false);
                             txtPass.setVisible(false);
