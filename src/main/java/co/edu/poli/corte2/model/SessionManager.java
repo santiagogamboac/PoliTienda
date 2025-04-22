@@ -9,7 +9,7 @@ public class SessionManager {
 
     private static SessionManager instance;
     private User currentUser;
-    private static final String key = "S0ftW4r3"; 
+    private static final String key = "Cl4v3S0ftW4r3***"; 
     
     private SessionManager() {}
     
@@ -37,6 +37,7 @@ public class SessionManager {
     }
 
     public static String encrypt(String strToEncrypt) throws Exception {
+        System.out.println("Caracteres: " + strToEncrypt.getBytes());
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), "AES");
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);

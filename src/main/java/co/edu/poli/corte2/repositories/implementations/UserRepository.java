@@ -34,7 +34,7 @@ public class UserRepository implements IUserRepository{
                     .filter(user -> user.getUserName().equals(username) &&
                                     user.getPassword().equals(password))
                     .findFirst()
-                    .orElseThrow(() -> new Exception("Usuario o contraseña incorrectos"));
+                    .orElse(null);
     }
 
     public static UserRepository getInstance() {
