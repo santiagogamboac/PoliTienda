@@ -1,7 +1,7 @@
 package co.edu.poli.corte2.model;
 
 /**
- * 
+ *
  */
 public class Product {
 
@@ -24,7 +24,8 @@ public class Product {
      * Precio del producto
      */
     private double price;
- 
+    private int supplierId;
+
     public int getId() {
         return id;
     }
@@ -57,13 +58,25 @@ public class Product {
         this.price = price;
     }
 
+    public int getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(int supplierId) {
+        this.supplierId = supplierId;
+    }
+
+    /**
+     * Constructor por defecto
+     */
     public Product() {
     }
 
-    public Product(int id, String name, String description, double price) {
+    public Product(int id, String name, String description, double price, int supplierId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.supplierId = supplierId;
     }
 }
