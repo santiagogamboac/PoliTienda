@@ -81,7 +81,6 @@ public class ProductController  implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         
         sessionManager = SessionManager.getInstance();
-        System.out.println("Usuario actual: " + sessionManager.getCurrentUser());
         productAccess = new ProductAccessProxy(sessionManager.getCurrentUser());
 
         idProducts.setCellValueFactory(new PropertyValueFactory<>("id"));

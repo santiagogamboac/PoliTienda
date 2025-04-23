@@ -37,7 +37,6 @@ public class SessionManager {
     }
 
     public static String encrypt(String strToEncrypt) throws Exception {
-        System.out.println("Caracteres: " + strToEncrypt.getBytes());
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), "AES");
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);

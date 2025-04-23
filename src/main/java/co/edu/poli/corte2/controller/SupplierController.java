@@ -11,6 +11,7 @@ import co.edu.poli.corte2.model.productViewDTO;
 import co.edu.poli.corte2.repositories.implementations.ProductRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -25,7 +26,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class SupplierController implements javafx.fxml.Initializable {
+public class SupplierController implements Initializable {
 
     @FXML
     private Button btnGuardar;
@@ -41,7 +42,7 @@ public class SupplierController implements javafx.fxml.Initializable {
     private TableColumn<productViewDTO, String> nameProducts;
 
     @FXML
-    private ComboBox<?> slcSupplier;
+    private ComboBox<String> slcSupplier;
 
     @FXML
     private TableColumn<productViewDTO, String> supplierProducts;
@@ -62,17 +63,19 @@ public class SupplierController implements javafx.fxml.Initializable {
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
 
+        SupplierFactory supplierFactory = new SupplierFactory();
+        List<Supplier> proveedores = supplierFactory.getAllSuppliers();
+
         nameProducts.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getName()));
         supplierProducts.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getSupplierName()));
 
         // Limpia el ComboBox y agrega la opción para nuevo proveedor
         cmbProveedores.getItems().clear();
         cmbProveedores.getItems().add("-- Nuevo Proveedor --");
-        SupplierFactory supplierFactory = new SupplierFactory();
-        List<Supplier> proveedores = supplierFactory.getAllSuppliers();
 
         // Agrega todos los proveedores registrados al ComboBox
         for (Supplier proveedor : proveedores) {
+            slcSupplier.getItems().add(proveedor.getName());
             cmbProveedores.getItems().add(proveedor.getName());
         }
 
@@ -84,7 +87,7 @@ public class SupplierController implements javafx.fxml.Initializable {
     @FXML
     void btnGuardar_Click(ActionEvent event) {
         try {
-
+            SupplierFactory sp = new SupplierFactory();
             String nombre = txtNombreProducto.getText();
             double precio = Double.parseDouble(txtPrecioProducto.getText());
             String descripcion = txtDescripcionProducto.getText();
@@ -106,11 +109,11 @@ public class SupplierController implements javafx.fxml.Initializable {
                     // El usuario canceló la creación del proveedor
                     return;
                 }
-                SupplierFactory sp = new SupplierFactory();
 
                 int id = sp.getUltimoIdProveedor();
+
                 Product producto = new Product(id, nombre, descripcion, precio, nuevoProveedor.getId());
-                guardarProducto(producto);
+                //guardarProducto(producto);
             } else {
                 // Obtener la instancia existente del proveedor usando el Factory
                 Supplier proveedorExistente = SupplierFactory.getSupplierByName(nombreProveedor);
@@ -201,16 +204,23 @@ public class SupplierController implements javafx.fxml.Initializable {
         return resultado.orElse(null);
     }
 
-    private void guardarProducto(Product producto) {
-        // Aquí iría tu lógica para guardar el producto en la base de datos o donde sea necesario
-        // System.out.println("Guardando producto: " + producto.getNombre());
-        // System.out.println("Con proveedor: " + producto.getProveedor().getNombre());
+    private String guardarProducto(Product producto) {
+        String nombreProducto = null;
+        ProductRepository pr = new ProductRepository();
+        try {
+            nombreProducto = pr.addProduct(producto);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return nombreProducto;
     }
 
-    private void guardarProveedor(Supplier producto) {
+    private String guardarProveedor(Supplier producto) {
         // Aquí iría tu lógica para guardar el producto en la base de datos o donde sea necesario
         // System.out.println("Guardando producto: " + producto.getNombre());
         // System.out.println("Con proveedor: " + producto.getProveedor().getNombre());
+        return "";
     }
 
     private void limpiarFormulario() {
@@ -218,6 +228,7 @@ public class SupplierController implements javafx.fxml.Initializable {
         txtNombreProducto.clear();
         txtPrecioProducto.clear();
         cmbProveedores.setValue(null);
+        txtDescripcionProducto.clear();
     }
 
     private void mostrarError(String mensaje) {

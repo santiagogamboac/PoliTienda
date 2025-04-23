@@ -8,7 +8,6 @@ import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import co.edu.poli.corte2.model.Customer;
 import co.edu.poli.corte2.model.Product;
 import co.edu.poli.corte2.repositories.interfaces.IProductRepository;
 
@@ -57,5 +56,14 @@ public class ProductRepository implements IProductRepository {
 
     public ProductRepository() {
         loadFromFile();
+    }
+
+    @Override
+    public String addProduct(Product producto) throws Exception {
+        products = this.getAllProducts();
+        products.add(producto);
+        File file = new File(FILE_PATH);
+        objectMapper.writeValue(file, products);
+        return "Producto " + producto.getName() + " Creado";
     }
 }

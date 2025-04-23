@@ -9,5 +9,6 @@ public interface IProductRepository {
 
     public List<Product> getAllProducts() throws Exception;
     public Product getProduct(int id) throws Exception;
+    public String addProduct(Product producto) throws Exception;
     public UserRepository getInstance();
 }

@@ -5,13 +5,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import co.edu.poli.corte2.repositories.implementations.ProductRepository;
 import co.edu.poli.corte2.repositories.implementations.SupplierRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class SupplierFactory {
 
-    private List<Supplier> cache;
+    private static List<Supplier> cache;
+    public static ProductRepository pr = new ProductRepository();
     // Caché de proveedores (estado compartido)
     private static final Map<String, Supplier> supplierCache = new HashMap<>();
     private static final TreeSet<Integer> supplierIds = new TreeSet<>();
@@ -54,7 +56,14 @@ public class SupplierFactory {
     }
 
     public static Supplier getSupplierByName(String name) {
-        return supplierCache.get(name);
+        cache = supplierRepository.cargarProveedores();
+        for (Supplier supplier : cache) {
+            if(supplier.getName().equals(name)){
+                supplierCache.put(name, supplier);
+                return supplierCache.get(name);
+            }
+        }
+        return null;        
     }
 
     public static ObservableList<String> getSupplierNames() {
@@ -85,10 +94,18 @@ public class SupplierFactory {
     }
 
     public static int getUltimoIdProveedor() {
+        try {
+            List<Product> productos = pr.getAllProducts();
+            int ultimo = productos.size();
+            supplierIds.add(ultimo + 1);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return supplierIds.isEmpty() ? 0 : supplierIds.last();
     }
 
     public static int getTotalSuppliers() {
+
         return supplierCache.size();
     }
 
