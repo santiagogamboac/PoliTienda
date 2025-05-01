@@ -124,7 +124,7 @@ public class SupplierController implements Initializable {
                 Product producto = new Product(id, nombre, descripcion, precio, proveedorExistente.getId());
                 guardarProducto(producto);
             }
-
+            cargarProductosEnTabla();
             limpiarFormulario();
 
         } catch (NumberFormatException e) {
