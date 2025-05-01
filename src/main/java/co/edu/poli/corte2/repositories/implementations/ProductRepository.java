@@ -60,8 +60,20 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public String addProduct(Product producto) throws Exception {
+        boolean update = false;
         products = this.getAllProducts();
-        products.add(producto);
+        for (Product elem : products) {
+            if(elem.getId() == producto.getId()){
+                elem.setName(producto.getName());
+                elem.setPrice(producto.getPrice());
+                elem.setDescription(producto.getDescription());
+                elem.setSupplierId(producto.getSupplierId());
+                update = true;
+            }
+        }
+        if(update == false) {
+            products.add(producto);
+        }
         File file = new File(FILE_PATH);
         objectMapper.writeValue(file, products);
         return "Producto " + producto.getName() + " Creado";

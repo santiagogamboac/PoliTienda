@@ -10,6 +10,6 @@ public interface ProductAccess {
      * @param product 
      * @return
      */
-    public String viewProductDetail(Product product);
+    public Product viewProductDetail(Product product);
 
 }

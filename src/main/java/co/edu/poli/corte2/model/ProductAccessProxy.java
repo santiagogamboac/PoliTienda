@@ -20,13 +20,13 @@ public class ProductAccessProxy implements ProductAccess {
      * @param product 
      * @return
      */
-    public String viewProductDetail(Product product) {
+    public Product viewProductDetail(Product product) {
 
         if(user != null && "ADMIN".equalsIgnoreCase(user.getRole())){
             return realAccess.viewProductDetail(product);
         } else {
             // TODO: handle exception
-            return "Este usuario no tiene permisos suficientes";
+            return null;
         }
     }
 
