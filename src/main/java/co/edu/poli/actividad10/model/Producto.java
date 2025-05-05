@@ -1,7 +1,8 @@
 package co.edu.poli.actividad10.model;
 
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -14,10 +15,12 @@ public class Producto {
     public Producto() {
     }
 
-    /**
-     * 
-     */
     private String nombre;
+    private String codigo;
+    private double precioActual;
+    private String descripcion;
+    private List<ObservadorProducto> observadores = new ArrayList<>();
+    private HistorialPrecios historial;
 
     public String getNombre() {
         return nombre;
@@ -51,23 +54,6 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    /**
-     * 
-     */
-    private String codigo;
-
-    /**
-     * 
-     */
-    private double precioActual;
-
-    /**
-     * 
-     */
-    private String descripcion;
-
-    private List<ObservadorProducto> observadores = new ArrayList<>();
-    private HistorialPrecios historial;
 
 
     public Producto(String nombre, String codigo, double precioActual, String descripcion,

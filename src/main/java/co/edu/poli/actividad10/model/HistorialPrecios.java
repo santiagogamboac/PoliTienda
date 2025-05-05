@@ -1,7 +1,6 @@
 package co.edu.poli.actividad10.model;
 
-import java.io.*;
-import java.util.*;
+import java.util.List;
 
 /**
  * 
@@ -14,14 +13,7 @@ public class HistorialPrecios {
     public HistorialPrecios() {
     }
 
-    /**
-     * 
-     */
     private List<ProductoMemento> historial;
-
-    /**
-     * 
-     */
     private Producto producto;
 
     /**

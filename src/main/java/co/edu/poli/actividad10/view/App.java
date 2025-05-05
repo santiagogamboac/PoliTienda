@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        AnchorPane ap = (AnchorPane) FXMLLoader.load(getClass().getResource("/co/edu/poli/corte2/view/MainView.fxml"));
+        AnchorPane ap = (AnchorPane) FXMLLoader.load(getClass().getResource("/co/edu/poli/actividad10/view/ProductoView.fxml"));
         scene = new Scene(ap);
         stage.setScene(scene);
         stage.setTitle("Portal negocio");

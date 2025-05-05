@@ -2,98 +2,100 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1089.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.corte2.controller.ProductController">
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.actividad10.controller.ProductoController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="996.0" text="Gestión de Productos" textAlignment="CENTER">
-         <font>
-            <Font size="36.0" />
-         </font>
-         <VBox.margin>
-            <Insets bottom="50.0" left="50.0" right="50.0" top="80.0" />
-         </VBox.margin>
-      </Label>
-      <HBox prefHeight="49.0" prefWidth="840.0">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1089.0">
          <children>
-            <TextField fx:id="txtIdProduct" prefHeight="25.0" prefWidth="200.0">
-               <HBox.margin>
-                  <Insets left="20.0" right="20.0" />
-               </HBox.margin>
-            </TextField>
-            <Button id="btnIdProduct" mnemonicParsing="false" onAction="#productDetails" text="Buscar" />
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="150.0" right="150.0" top="10.0" />
-         </padding>
-         <VBox.margin>
-            <Insets bottom="2.0" left="100.0" right="100.0" top="2.0" />
-         </VBox.margin>
-      </HBox>
-      <HBox prefHeight="316.0" prefWidth="840.0">
-         <children>
-            <TableView fx:id="tblProducts" prefHeight="306.0" prefWidth="656.0">
-              <columns>
-                <TableColumn fx:id="idProducts" prefWidth="97.0" text="ID" />
-                <TableColumn fx:id="nameProducts" prefWidth="479.0" text="Producto" />
-              </columns>
-               <HBox.margin>
-                  <Insets bottom="5.0" left="30.0" right="10.0" top="5.0" />
-               </HBox.margin>
-            </TableView>
-            <VBox prefHeight="296.0" prefWidth="338.0">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-               </HBox.margin>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="996.0" text="Gestión de Productos" textAlignment="CENTER">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="50.0" left="50.0" right="50.0" top="80.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="49.0" prefWidth="840.0">
                <children>
-                  <Label id="0" fx:id="lblId" text="ID:">
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <HBox prefHeight="35.0" prefWidth="439.0">
-                     <children>
-                        <TextField fx:id="txtProdName" prefHeight="25.0" prefWidth="200.0" promptText="Nombre">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <TextField fx:id="txtProdPrice" prefHeight="25.0" prefWidth="200.0" promptText="Precio">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                           </HBox.margin>
-                        </TextField>
-                     </children>
-                  </HBox>
-                  <TextArea fx:id="txtProdDesc" prefHeight="37.0" prefWidth="443.0" promptText="Descripción del Producto">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin>
-                  </TextArea>
-                  <ComboBox fx:id="slcSupplier" prefHeight="25.0" prefWidth="485.0" promptText="Seleccione el Proveedor">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin>
-                  </ComboBox>
-                  <Button id="btnGuardar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#gestionProducto" prefHeight="25.0" prefWidth="75.0" text="Guardar">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </VBox.margin>
-                  </Button>
+                  <TextField fx:id="txtCodeProduct" prefHeight="25.0" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button id="btnIdProduct" mnemonicParsing="false" onAction="#productDetails" text="Buscar" />
                </children>
-            </VBox>
+               <padding>
+                  <Insets bottom="10.0" left="150.0" right="150.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="2.0" left="100.0" right="100.0" top="2.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="316.0" prefWidth="840.0">
+               <children>
+                  <TableView fx:id="tblProducts" prefHeight="306.0" prefWidth="656.0">
+                    <columns>
+                        <TableColumn fx:id="codeProducts" prefWidth="75.0" text="Código" />
+                      <TableColumn fx:id="nameProducts" prefWidth="181.0" text="Producto" />
+                      <TableColumn fx:id="descProducts" minWidth="0.0" prefWidth="317.0" text="Descripción" />
+                        <TableColumn fx:id="priceProducts" prefWidth="79.0" text="Precio" />
+                    </columns>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="30.0" right="10.0" top="5.0" />
+                     </HBox.margin>
+                  </TableView>
+                  <VBox prefHeight="296.0" prefWidth="338.0">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </HBox.margin>
+                     <children>
+                        <TextField fx:id="txtProdCode" promptText="Código">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <HBox prefHeight="35.0" prefWidth="439.0">
+                           <children>
+                              <TextField fx:id="txtProdName" prefHeight="25.0" prefWidth="200.0" promptText="Nombre">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <TextField fx:id="txtProdPrice" prefHeight="25.0" prefWidth="200.0" promptText="Precio">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <TextArea fx:id="txtProdDesc" prefHeight="37.0" prefWidth="443.0" promptText="Descripción del Producto">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
+                        </TextArea>
+                        <Button id="btnGuardar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#gestionProducto" prefHeight="25.0" prefWidth="75.0" text="Guardar">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
-      </HBox>
+      </VBox>
    </children>
-</VBox>
+</AnchorPane>
