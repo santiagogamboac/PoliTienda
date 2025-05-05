@@ -1,4 +1,4 @@
-package co.edu.poli.corte2.view;
+package co.edu.poli.actividad10.view;
 
 import java.io.IOException;
 
