@@ -74,23 +74,17 @@ public class ProductoController implements Initializable{
     
     private Producto producto = new Producto();
     Alert error = new Alert(AlertType.ERROR);
-
-
+    Alert mensaje = new Alert(AlertType.INFORMATION);
 
     @FXML
     void cambiarPrecio(ActionEvent event) {
      String porcentajeStr = txtPercent.getText();
         int porcentaje = Integer.parseInt(porcentajeStr);
         
-
-          preciosOriginales.clear();
-            productosModificados.clear();
-
+        preciosOriginales.clear();
+        productosModificados.clear();
             
         Collection<Producto> prAll = productos.obtenerTodosProductos();
-
-        
-   
 
         for (Producto producto : prAll) {
           if (!preciosOriginales.containsKey(producto.getCodigo())) {
@@ -108,36 +102,40 @@ public class ProductoController implements Initializable{
                     historial.registrarCambioPrecio();
                 }
         }    
-                    // Actualizar tabla
-            tblProducts.refresh();                
+        // Actualizar tabla
+        tblProducts.refresh();
+        mensaje.setContentText("Cambio del " + porcentajeStr + "% en todos los productos");
+        mensaje.show();
     }
 
     @FXML
     void restaurarPrecio(ActionEvent event) {
-  try {
-        for (String codigo : productosModificados) {
-                if (preciosOriginales.containsKey(codigo)) {
-                    Producto producto = productos.obtenerProducto(codigo);
-                    if (producto != null) {
-                        producto.setPrecio(preciosOriginales.get(codigo));
-                     
-                        HistorialPrecios historial = productos.obtenerHistorial(codigo);
-                        if (historial != null) {
-                            historial.registrarCambioPrecio();
+    try {
+            for (String codigo : productosModificados) {
+                    if (preciosOriginales.containsKey(codigo)) {
+                        Producto producto = productos.obtenerProducto(codigo);
+                        if (producto != null) {
+                            producto.setPrecio(preciosOriginales.get(codigo));
+                        
+                            HistorialPrecios historial = productos.obtenerHistorial(codigo);
+                            if (historial != null) {
+                                historial.registrarCambioPrecio();
+                            }
                         }
                     }
                 }
-            }
-            
-            // Limpiar los registros
-            preciosOriginales.clear();
-            productosModificados.clear();
-                       tblProducts.refresh();  
-            
-    } catch (Exception e) {
-        error.setContentText("Ocurrió un error al restaurar los precios.");
-        error.show();
-    }
+                
+                // Limpiar los registros
+                preciosOriginales.clear();
+                productosModificados.clear();
+                tblProducts.refresh();  
+                mensaje.setContentText("Precios restaurados al porcentaje anterior");
+                mensaje.show();        
+        } catch (Exception e) {
+            error.setContentText("Ocurrió un error al restaurar los precios.");
+            error.show();
+        }
+    
     }
 
     @FXML
