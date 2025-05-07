@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="311.0" layoutY="30.0" text="Arma tu Ancheta">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnVino" layoutX="69.0" layoutY="194.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="Vino" />
+      <Button layoutX="159.0" layoutY="373.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="Buñuelo" />
+      <Button layoutX="159.0" layoutY="284.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="Duraznos" />
+      <Button layoutX="69.0" layoutY="284.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="Maní" />
+      <Button layoutX="69.0" layoutY="373.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="Natilla" />
+      <Button layoutX="159.0" layoutY="194.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="Galletas" />
+      <Label layoutX="69.0" layoutY="109.0" text="Cantidad de Anchetas" />
+      <TextField layoutX="69.0" layoutY="136.0" prefHeight="25.0" prefWidth="170.0" />
+      <TextField layoutX="341.0" layoutY="306.0" prefHeight="25.0" prefWidth="170.0" promptText="Nombre de Cliente" />
+      <TextField layoutX="528.0" layoutY="306.0" prefHeight="25.0" prefWidth="170.0" promptText="Correo" />
+      <TextField layoutX="528.0" layoutY="341.0" prefHeight="25.0" prefWidth="170.0" promptText="Teléfono" />
+      <TextField layoutX="341.0" layoutY="341.0" prefHeight="25.0" prefWidth="170.0" promptText="Dirección" />
+      <Label layoutX="342.0" layoutY="426.0" text="Total: ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="403.0" layoutY="426.0" prefHeight="27.0" prefWidth="107.0" text="0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="578.0" layoutY="427.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Pagar" />
+      <Label alignment="TOP_LEFT" layoutX="342.0" layoutY="110.0" prefHeight="149.0" prefWidth="355.0" text="Descripción del pedido:" />
+      <CheckBox layoutX="341.0" layoutY="283.0" mnemonicParsing="false" text="Aplica para Descuento" />
+      <Label layoutX="342.0" layoutY="373.0" text="Subtotal">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="403.0" layoutY="373.0" prefHeight="27.0" prefWidth="107.0" text="0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="342.0" layoutY="400.0" text="Descuento">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="403.0" layoutY="400.0" prefHeight="27.0" prefWidth="107.0" text="0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

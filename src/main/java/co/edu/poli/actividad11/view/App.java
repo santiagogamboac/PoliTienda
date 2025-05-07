@@ -1,4 +1,4 @@
-package co.edu.poli.actividad10.view;
+package co.edu.poli.actividad11.view;
 
 import java.io.IOException;
 
@@ -17,11 +17,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        AnchorPane ap = (AnchorPane) FXMLLoader.load(getClass().getResource("/co/edu/poli/actividad10/view/ProductoView.fxml"));
+        AnchorPane ap = (AnchorPane) FXMLLoader.load(getClass().getResource("/co/edu/poli/actividad11/view/PedidoView.fxml"));
         scene = new Scene(ap);
         stage.setScene(scene);
-        stage.setTitle("Portal negocio");
-        stage.setMaximized(true);
+        stage.setTitle("Carrito de Compras");
+        //stage.setMaximized(true);
         stage.show();
     }
 
