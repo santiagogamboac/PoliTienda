@@ -7,40 +7,36 @@ import java.util.List;
  */
 public class EliminarProductoCommand implements ProductoCommand {
 
+    private List<Producto> listaProd;
+    private Producto prod;
+
     /**
-     * Default constructor
+     * @param productos 
+     * @param productoElliminado
      */
-    public EliminarProductoCommand() {
+    public EliminarProductoCommand(List<Producto> productos, Producto productoEliminado) {
+        // TODO implement here
+        this.listaProd = productos;
+        this.prod = productoEliminado;
+
     }
 
     /**
      * 
      */
-    private Producto prod;
-
-
-    /**
-     * @param productos 
-     * @param nombreProducto
-     */
-    public EliminarProductoCommand(List<Producto> productos, String nombreProducto) {
-        // TODO implement here
+    @Override
+    public List<Producto> execute() {
+        listaProd.remove(prod);
+        return listaProd;
     }
 
     /**
-     * @return
+     * 
      */
-    public void execute() {
-        // TODO implement ProductoCommand.execute() here
-
-    }
-
-    /**
-     * @return
-     */
-    public void undo() {
-        // TODO implement ProductoCommand.undo() here
-
+    @Override
+    public List<Producto> undo() {
+        listaProd.add(prod);
+        return listaProd;
     }
 
 }

@@ -7,44 +7,34 @@ import java.util.List;
  */
 public class AgregarProductoCommand implements ProductoCommand {
 
-    /**
-     * Default constructor
-     */
-    public AgregarProductoCommand() {
-    }
-
-    /**
-     * 
-     */
-    private List<Producto> productos;
-
-    /**
-     * 
-     */
+    private List<Producto> listaProd;
     private Producto prod;
 
     /**
      * @param productos 
-     * @param nombreProducto
+     * @param productoAgregado
      */
-    public AgregarProductoCommand(List<Producto> productos, String nombreProducto) {
-        // TODO implement here
+    public AgregarProductoCommand(List<Producto> productos, Producto productoAgregado) {
+        this.listaProd = productos;
+        this.prod = productoAgregado;
     }
 
     /**
-     * @return
+     * 
      */
-    public void execute() {
-        // TODO implement ProductoCommand.execute() here
-        
+    @Override
+    public List<Producto> execute() {
+        listaProd.add(prod);
+        return listaProd;
     }
 
     /**
-     * @return
+     * 
      */
-    public void undo() {
-        // TODO implement ProductoCommand.undo() here
-        
+    @Override
+    public List<Producto> undo() {
+        listaProd.remove(prod);
+        return listaProd;
     }
 
 }

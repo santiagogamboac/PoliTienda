@@ -1,8 +1,5 @@
 package co.edu.poli.actividad11.model;
 
-import java.io.*;
-import java.util.*;
-
 /**
  * 
  */
@@ -20,7 +17,7 @@ public class DescuentoTemporada implements DescuentoStrategy {
      */
     public double aplicarDescuento(double total) {
         // TODO implement DescuentoStrategy.aplicarDescuento() here
-        return 0.0d;
+        return total * 0.80;
     }
 
 }

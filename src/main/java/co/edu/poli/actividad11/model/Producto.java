@@ -1,37 +1,58 @@
 package co.edu.poli.actividad11.model;
 
-import java.io.*;
-import java.util.*;
-
 /**
  * 
  */
-public abstract class Producto {
+public class Producto {
 
-    /**
-     * Default constructor
-     */
-    public Producto() {
+    private String codigo;
+    private String nombre;
+    private String descripcion;
+    private double precio;
+
+      public String getCodigo() {
+        return codigo;
     }
 
-    /**
-     * 
-     */
-    private String codigo;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
-    /**
-     * 
-     */
-    private String nombre;
 
-    /**
-     * 
-     */
-    private String descripcion;
+    public String getNombre() {
+        return nombre;
+    }
 
-    /**
-     * 
-     */
-    private double precio;
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+
+    public double getPrecio() {
+        return precio;
+    }
+
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+      public Producto(String codigo, String nombre, String descripcion, double precio) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
 
 }
