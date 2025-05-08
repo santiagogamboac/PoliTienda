@@ -213,8 +213,8 @@ public class PedidoController implements Initializable {
     @FXML
     void generarPedido(ActionEvent event) {
 
-        double totalBase = Double.parseDouble(lblSubTotal.getText());
-        Pedido pedido = new Pedido(totalBase);
+        double subtotal = Double.parseDouble(lblSubTotal.getText().replace("$", ""));        
+        Pedido pedido = new Pedido(subtotal);
 
         String seleccion = comboDescuento.getValue();
         switch (seleccion) {
@@ -229,15 +229,13 @@ public class PedidoController implements Initializable {
         }
 
         totalConDescuento = pedido.calcularTotalConDescuento();
-        double subtotal = Double.parseDouble(lblSubTotal.getText());
-        double total = Double.parseDouble(lblTotal.getText());
+  
+          // Mostrar el total con descuento
+    lblTotal.setText("$" + totalConDescuento);
 
-        if (seleccion == "Sin descuento") {
-            lblTotal.setText("$" + totalConDescuento);
-        } else {
-
-            lblDescuento.setText(+((subtotal - total) / total * 100) + "%");
-        }
+    // Calcular y mostrar el descuento aplicado
+    double descuento = subtotal - totalConDescuento;
+    lblDescuento.setText("$" + descuento);
 
     }
 
