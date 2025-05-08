@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import co.edu.poli.actividad11.model.AgregarProductoCommand;
-import co.edu.poli.actividad11.model.DescuentoPorCantidad;
+import co.edu.poli.actividad11.model.DescuentoClienteFrecuente;
 import co.edu.poli.actividad11.model.DescuentoTemporada;
 import co.edu.poli.actividad11.model.EliminarProductoCommand;
 import co.edu.poli.actividad11.model.Invoker;
@@ -21,7 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class PedidoController implements Initializable{
+public class PedidoController implements Initializable {
 
     @FXML
     private CheckBox chBunuelo;
@@ -40,13 +40,13 @@ public class PedidoController implements Initializable{
 
     @FXML
     private CheckBox chVino;
-    
+
     @FXML
     private ComboBox<String> comboDescuento;
 
     @FXML
     private Label lblDescProductos;
-    
+
     @FXML
     private Label lblDescuento;
 
@@ -86,8 +86,8 @@ public class PedidoController implements Initializable{
 
     @FXML
     void ActualizaVino(ActionEvent event) {
-        
-        if(chVino.isSelected()){
+
+        if (chVino.isSelected()) {
             listadoProductos = invoker.ejecutarComando(new AgregarProductoCommand(listadoProductos, vino));
         } else {
             listadoProductos = invoker.ejecutarComando(new EliminarProductoCommand(listadoProductos, vino));
@@ -95,18 +95,20 @@ public class PedidoController implements Initializable{
         StringBuilder sb = new StringBuilder("Descripción del pedido: \n");
         listadoProductos.forEach(p -> sb.append(p.getDescripcion()).append(":\t $").append(p.getPrecio()).append("\n"));
         subtotal = 0;
-        for (Producto p : listadoProductos) { subtotal += p.getPrecio(); }
+        for (Producto p : listadoProductos) {
+            subtotal += p.getPrecio();
+        }
         lblDescProductos.setText(sb.toString());
         lblSubTotal.setText(String.valueOf(subtotal));
-        lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
+        //lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
         this.generarPedido(event);
 
     }
 
     @FXML
     void ActualizaGalleta(ActionEvent event) {
-        
-        if(chGalleta.isSelected()){
+
+        if (chGalleta.isSelected()) {
             listadoProductos = invoker.ejecutarComando(new AgregarProductoCommand(listadoProductos, galletas));
         } else {
             listadoProductos = invoker.ejecutarComando(new EliminarProductoCommand(listadoProductos, galletas));
@@ -114,25 +116,29 @@ public class PedidoController implements Initializable{
         StringBuilder sb = new StringBuilder("Descripción del pedido: \n");
         listadoProductos.forEach(p -> sb.append(p.getDescripcion()).append(":\t $").append(p.getPrecio()).append("\n"));
         subtotal = 0;
-        for (Producto p : listadoProductos) { subtotal += p.getPrecio(); }
+        for (Producto p : listadoProductos) {
+            subtotal += p.getPrecio();
+        }
         lblDescProductos.setText(sb.toString());
         lblSubTotal.setText(String.valueOf(subtotal));
-        lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
+        //lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
         this.generarPedido(event);
     }
 
     @FXML
     void ActualizaMani(ActionEvent event) {
-        
-        if(chMani.isSelected()){
+
+        if (chMani.isSelected()) {
             listadoProductos = invoker.ejecutarComando(new AgregarProductoCommand(listadoProductos, mani));
         } else {
             listadoProductos = invoker.ejecutarComando(new EliminarProductoCommand(listadoProductos, mani));
         }
-        
+
         listadoProductos.forEach(p -> sb.append(p.getDescripcion()).append(":\t $").append(p.getPrecio()).append("\n"));
         subtotal = 0;
-        for (Producto p : listadoProductos) { subtotal += p.getPrecio(); }
+        for (Producto p : listadoProductos) {
+            subtotal += p.getPrecio();
+        }
         lblDescProductos.setText(sb.toString());
         lblSubTotal.setText(String.valueOf(subtotal));
         lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
@@ -141,8 +147,8 @@ public class PedidoController implements Initializable{
 
     @FXML
     void ActualizaDurazno(ActionEvent event) {
-        
-        if(chDurazno.isSelected()){
+
+        if (chDurazno.isSelected()) {
             listadoProductos = invoker.ejecutarComando(new AgregarProductoCommand(listadoProductos, durazno));
         } else {
             listadoProductos = invoker.ejecutarComando(new EliminarProductoCommand(listadoProductos, durazno));
@@ -150,36 +156,39 @@ public class PedidoController implements Initializable{
         StringBuilder sb = new StringBuilder("Descripción del pedido: \n");
         listadoProductos.forEach(p -> sb.append(p.getDescripcion()).append(":\t $").append(p.getPrecio()).append("\n"));
         subtotal = 0;
-        for (Producto p : listadoProductos) { subtotal += p.getPrecio(); }
+        for (Producto p : listadoProductos) {
+            subtotal += p.getPrecio();
+        }
         lblDescProductos.setText(sb.toString());
         lblSubTotal.setText(String.valueOf(subtotal));
-        lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
+        //lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
         this.generarPedido(event);
     }
 
     @FXML
     void ActualizaNatilla(ActionEvent event) {
-        
 
-        if(chNatilla.isSelected()){
+        if (chNatilla.isSelected()) {
             listadoProductos = invoker.ejecutarComando(new AgregarProductoCommand(listadoProductos, natilla));
-        }else {
+        } else {
             listadoProductos = invoker.ejecutarComando(new EliminarProductoCommand(listadoProductos, natilla));
-        } 
+        }
         StringBuilder sb = new StringBuilder("Descripción del pedido: \n");
         listadoProductos.forEach(p -> sb.append(p.getDescripcion()).append(":\t $").append(p.getPrecio()).append("\n"));
         subtotal = 0;
-        for (Producto p : listadoProductos) { subtotal += p.getPrecio(); }
+        for (Producto p : listadoProductos) {
+            subtotal += p.getPrecio();
+        }
         lblDescProductos.setText(sb.toString());
         lblSubTotal.setText(String.valueOf(subtotal));
-        lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
+        //lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
         this.generarPedido(event);
     }
 
     @FXML
     void ActualizaBunuelo(ActionEvent event) {
-        
-        if(chBunuelo.isSelected()){
+
+        if (chBunuelo.isSelected()) {
             listadoProductos = invoker.ejecutarComando(new AgregarProductoCommand(listadoProductos, bunuelos));
         } else {
             listadoProductos = invoker.ejecutarComando(new EliminarProductoCommand(listadoProductos, bunuelos));
@@ -187,10 +196,12 @@ public class PedidoController implements Initializable{
         StringBuilder sb = new StringBuilder("Descripción del pedido: \n");
         listadoProductos.forEach(p -> sb.append(p.getDescripcion()).append(":\t $").append(p.getPrecio()).append("\n"));
         subtotal = 0;
-        for (Producto p : listadoProductos) { subtotal += p.getPrecio(); }
+        for (Producto p : listadoProductos) {
+            subtotal += p.getPrecio();
+        }
         lblDescProductos.setText(sb.toString());
         lblSubTotal.setText(String.valueOf(subtotal));
-        lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
+        // lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
         this.generarPedido(event);
     }
 
@@ -202,29 +213,37 @@ public class PedidoController implements Initializable{
     @FXML
     void generarPedido(ActionEvent event) {
 
-        double totalBase = Double.parseDouble(lblSubTotal.getText()); // Por ejemplo
+        double totalBase = Double.parseDouble(lblSubTotal.getText());
         Pedido pedido = new Pedido(totalBase);
 
-    String seleccion = comboDescuento.getValue();
-    switch (seleccion) {
-        case "Cantidad":
-            pedido.setDescuentoStrategy(new DescuentoPorCantidad());
-            break;
-        case "Temporada":
-            pedido.setDescuentoStrategy(new DescuentoTemporada());
-            break;
-        default:
-            pedido.setDescuentoStrategy(new SinDescuento());
-    }
+        String seleccion = comboDescuento.getValue();
+        switch (seleccion) {
+            case "ClienteFrecuente":
+                pedido.setDescuentoStrategy(new DescuentoClienteFrecuente());
+                break;
+            case "Temporada":
+                pedido.setDescuentoStrategy(new DescuentoTemporada());
+                break;
+            default:
+                pedido.setDescuentoStrategy(new SinDescuento());
+        }
 
-    totalConDescuento = pedido.calcularTotalConDescuento();
-    lblTotal.setText("$" + totalConDescuento);
+        totalConDescuento = pedido.calcularTotalConDescuento();
+        double subtotal = Double.parseDouble(lblSubTotal.getText());
+        double total = Double.parseDouble(lblTotal.getText());
+
+        if (seleccion == "Sin descuento") {
+            lblTotal.setText("$" + totalConDescuento);
+        } else {
+
+            lblDescuento.setText(+((subtotal - total) / total * 100) + "%");
+        }
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        comboDescuento.getItems().addAll("Sin descuento", "Cantidad", "Temporada");
+        comboDescuento.getItems().addAll("Sin descuento", "ClienteFrecuente", "Temporada");
         comboDescuento.getSelectionModel().selectFirst();
     }
 

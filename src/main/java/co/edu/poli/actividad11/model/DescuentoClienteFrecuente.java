@@ -1,22 +1,23 @@
 package co.edu.poli.actividad11.model;
 
 /**
- * 
+ *
  */
-public class DescuentoPorCantidad implements DescuentoStrategy {
+public class DescuentoClienteFrecuente implements DescuentoStrategy {
 
     /**
      * Default constructor
      */
-    public DescuentoPorCantidad() {
+    public DescuentoClienteFrecuente() {
     }
 
     /**
-     * @param total 
+     * @param total
      * @return
      */
+    @Override
     public double aplicarDescuento(double total) {
-        // TODO implement DescuentoStrategy.aplicarDescuento() here
+
         return total * 0.90;
     }
 
