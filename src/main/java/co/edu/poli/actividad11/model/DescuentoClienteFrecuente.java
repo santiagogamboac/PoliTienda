@@ -18,7 +18,7 @@ public class DescuentoClienteFrecuente implements DescuentoStrategy {
     @Override
     public double aplicarDescuento(double total) {
 
-        return total * 0.90;
+        return total * 0.50;
     }
 
 }

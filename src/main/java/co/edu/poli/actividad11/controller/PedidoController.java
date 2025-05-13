@@ -16,6 +16,7 @@ import co.edu.poli.actividad11.model.SinDescuento;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -207,21 +208,43 @@ public class PedidoController implements Initializable {
 
     @FXML
     void PagarPedido(ActionEvent event) {
+        boolean algunCheckboxSeleccionado = chVino.isSelected()
+                || chGalleta.isSelected()
+                || chMani.isSelected()
+                || chDurazno.isSelected()
+                || chNatilla.isSelected()
+                || chBunuelo.isSelected();
 
+        if (!algunCheckboxSeleccionado) {
+            // Mostrar alerta si no hay productos seleccionados
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Advertencia");
+            alert.setHeaderText("No hay productos seleccionados");
+            alert.setContentText("Por favor seleccione al menos un producto.");
+            alert.showAndWait();
+            return;
+        }
+
+        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+        successAlert.setTitle("Pedido generado");
+        successAlert.setHeaderText("Pedido generado correctamente");
+        successAlert.setContentText("El pedido ha sido registrado exitosamente.\n"
+                + "Total a pagar: " + lblTotal.getText());
+        successAlert.showAndWait();
     }
 
     @FXML
     void generarPedido(ActionEvent event) {
 
-        double subtotal = Double.parseDouble(lblSubTotal.getText().replace("$", ""));        
+        double subtotal = Double.parseDouble(lblSubTotal.getText().replace("$", ""));
         Pedido pedido = new Pedido(subtotal);
 
         String seleccion = comboDescuento.getValue();
         switch (seleccion) {
-            case "ClienteFrecuente":
+            case "Cliente Frecuente -50%":
                 pedido.setDescuentoStrategy(new DescuentoClienteFrecuente());
                 break;
-            case "Temporada":
+            case "Temporada -20%":
                 pedido.setDescuentoStrategy(new DescuentoTemporada());
                 break;
             default:
@@ -229,19 +252,19 @@ public class PedidoController implements Initializable {
         }
 
         totalConDescuento = pedido.calcularTotalConDescuento();
-  
-          // Mostrar el total con descuento
-    lblTotal.setText("$" + totalConDescuento);
 
-    // Calcular y mostrar el descuento aplicado
-    double descuento = subtotal - totalConDescuento;
-    lblDescuento.setText("$" + descuento);
+        // Mostrar el total con descuento
+        lblTotal.setText("$" + totalConDescuento);
+
+        // Calcular y mostrar el descuento aplicado
+        double descuento = subtotal - totalConDescuento;
+        lblDescuento.setText("$" + descuento);
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        comboDescuento.getItems().addAll("Sin descuento", "ClienteFrecuente", "Temporada");
+        comboDescuento.getItems().addAll("Sin descuento", "Cliente Frecuente -50%", "Temporada -20%");
         comboDescuento.getSelectionModel().selectFirst();
     }
 

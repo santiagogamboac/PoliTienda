@@ -8,58 +8,63 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.actividad11.controller.PedidoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="614.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.actividad11.controller.PedidoController">
    <children>
-      <Label contentDisplay="CENTER" layoutX="311.0" layoutY="30.0" text="Arma tu Ancheta">
+      <Label contentDisplay="CENTER" layoutX="154.0" layoutY="28.0" text="Arma tu Ancheta">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="69.0" layoutY="109.0" text="Cantidad de Anchetas:" />
-      <TextField fx:id="txtCant" layoutX="69.0" layoutY="136.0" prefHeight="25.0" prefWidth="170.0" />
-      <TextField fx:id="txtCliente" layoutX="341.0" layoutY="306.0" prefHeight="25.0" prefWidth="170.0" promptText="Nombre de Cliente" />
-      <TextField fx:id="txtCorreo" layoutX="528.0" layoutY="306.0" prefHeight="25.0" prefWidth="170.0" promptText="Correo" />
-      <TextField fx:id="txtTelefono" layoutX="528.0" layoutY="341.0" prefHeight="25.0" prefWidth="170.0" promptText="Teléfono" />
-      <TextField fx:id="txtDireccion" layoutX="341.0" layoutY="341.0" prefHeight="25.0" prefWidth="170.0" promptText="Dirección" />
-      <Label layoutX="342.0" layoutY="426.0" text="Total: ">
+      <Label layoutX="75.0" layoutY="106.0" text="Cantidad de Anchetas:" />
+      <TextField fx:id="txtCant" layoutX="62.0" layoutY="137.0" prefHeight="25.0" prefWidth="170.0" />
+      <TextField fx:id="txtCliente" layoutX="582.0" layoutY="181.0" prefHeight="25.0" prefWidth="170.0" promptText="Nombre de Cliente" />
+      <TextField fx:id="txtCorreo" layoutX="764.0" layoutY="181.0" prefHeight="25.0" prefWidth="170.0" promptText="Correo" />
+      <Label layoutX="593.0" layoutY="473.0" text="Total: ">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblTotal" alignment="CENTER_RIGHT" layoutX="403.0" layoutY="426.0" prefHeight="27.0" prefWidth="107.0" text="0">
+      <Label fx:id="lblTotal" alignment="CENTER_RIGHT" layoutX="680.0" layoutY="473.0" prefHeight="27.0" prefWidth="107.0" text="0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button id="btnPago" layoutX="578.0" layoutY="427.0" mnemonicParsing="false" onAction="#PagarPedido" prefHeight="25.0" prefWidth="72.0" text="Pagar" />
-      <Label fx:id="lblDescProductos" alignment="TOP_LEFT" layoutX="275.0" layoutY="110.0" prefHeight="149.0" prefWidth="482.0" text="Descripción del pedido:" />
-      <Label layoutX="342.0" layoutY="373.0" text="Subtotal">
+      <Button id="btnPago" layoutX="587.0" layoutY="516.0" mnemonicParsing="false" onAction="#PagarPedido" prefHeight="26.0" prefWidth="214.0" text="Pagar" />
+      <Label fx:id="lblDescProductos" alignment="TOP_LEFT" layoutX="257.0" layoutY="143.0" prefHeight="405.0" prefWidth="311.0" text="Descripción del pedido:" />
+      <Label layoutX="591.0" layoutY="404.0" text="Subtotal">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblSubTotal" alignment="CENTER_RIGHT" layoutX="403.0" layoutY="373.0" prefHeight="27.0" prefWidth="107.0" text="0">
+      <Label fx:id="lblSubTotal" alignment="CENTER_RIGHT" layoutX="680.0" layoutY="400.0" prefHeight="27.0" prefWidth="107.0" text="0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="342.0" layoutY="400.0" text="Descuento">
+      <Label layoutX="593.0" layoutY="441.0" text="Descuento">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblDescuento" alignment="CENTER_RIGHT" layoutX="403.0" layoutY="400.0" prefHeight="27.0" prefWidth="107.0" text="0">
+      <Label fx:id="lblDescuento" alignment="CENTER_RIGHT" layoutX="680.0" layoutY="437.0" prefHeight="27.0" prefWidth="107.0" text="0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="comboDescuento" layoutX="529.0" layoutY="272.0" onAction="#generarPedido" prefHeight="25.0" prefWidth="170.0" />
-      <Label layoutX="341.0" layoutY="276.0" text="Tipo de Descuento:" />
+      <ComboBox fx:id="comboDescuento" layoutX="734.0" layoutY="342.0" onAction="#generarPedido" prefHeight="25.0" prefWidth="170.0" />
+      <Label layoutX="600.0" layoutY="346.0" text="Tipo de Descuento:" />
       <CheckBox fx:id="chVino" layoutX="69.0" layoutY="185.0" mnemonicParsing="false" onAction="#ActualizaVino" prefHeight="27.0" prefWidth="170.0" text="Vino" />
       <CheckBox fx:id="chGalleta" layoutX="69.0" layoutY="221.0" mnemonicParsing="false" onAction="#ActualizaGalleta" prefHeight="27.0" prefWidth="170.0" text="Galletas" />
       <CheckBox fx:id="chMani" layoutX="69.0" layoutY="259.0" mnemonicParsing="false" onAction="#ActualizaMani" prefHeight="27.0" prefWidth="170.0" text="Maní" />
       <CheckBox fx:id="chDurazno" layoutX="69.0" layoutY="293.0" mnemonicParsing="false" onAction="#ActualizaDurazno" prefHeight="27.0" prefWidth="170.0" text="Duraznos" />
       <CheckBox fx:id="chNatilla" layoutX="69.0" layoutY="328.0" mnemonicParsing="false" onAction="#ActualizaNatilla" prefHeight="27.0" prefWidth="170.0" text="Natilla" />
       <CheckBox fx:id="chBunuelo" layoutX="69.0" layoutY="360.0" mnemonicParsing="false" onAction="#ActualizaBunuelo" prefHeight="27.0" prefWidth="170.0" text="Buñuelo" />
+      <TextField layoutX="582.0" layoutY="228.0" promptText="Edad" />
+      <Label contentDisplay="CENTER" layoutX="675.0" layoutY="115.0" text="Registrar Cliente">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button id="btnPago" layoutX="765.0" layoutY="228.0" mnemonicParsing="false" onAction="#PagarPedido" prefHeight="26.0" prefWidth="170.0" text="Registrar" />
    </children>
 </AnchorPane>

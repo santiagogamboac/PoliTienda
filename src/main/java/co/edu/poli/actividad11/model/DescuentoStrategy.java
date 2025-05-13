@@ -4,14 +4,10 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 
+ *
  */
 public interface DescuentoStrategy {
 
-    /**
-     * @param total 
-     * @return
-     */
     public double aplicarDescuento(double total);
 
 }
