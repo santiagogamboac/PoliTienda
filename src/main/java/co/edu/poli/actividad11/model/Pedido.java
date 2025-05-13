@@ -18,7 +18,6 @@ public class Pedido {
     private String fecha;
     private Cliente cliente;
     private ArrayList<Producto> producto;
-    private MetodoPago metodoPago;
     private DescuentoStrategy descuentoStrategy;
     private double total;
 
@@ -54,14 +53,6 @@ public class Pedido {
         this.producto = producto;
     }
 
-    public MetodoPago getMetodoPago() {
-        return metodoPago;
-    }
-
-    public void setMetodoPago(MetodoPago metodoPago) {
-        this.metodoPago = metodoPago;
-    }
-
     public DescuentoStrategy getDescuentoStrategy() {
         return descuentoStrategy;
     }
@@ -79,13 +70,12 @@ public class Pedido {
     }
 
     
-    public Pedido(String numero, String fecha, Cliente cliente, ArrayList<Producto> producto, MetodoPago metodoPago,
+    public Pedido(String numero, String fecha, Cliente cliente, ArrayList<Producto> producto, 
             DescuentoStrategy descuentoStrategy, double total) {
         this.numero = numero;
         this.fecha = fecha;
         this.cliente = cliente;
         this.producto = producto;
-        this.metodoPago = metodoPago;
         this.descuentoStrategy = descuentoStrategy;
         this.total = total;
     }

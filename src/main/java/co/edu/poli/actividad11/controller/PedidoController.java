@@ -134,7 +134,7 @@ public class PedidoController implements Initializable {
         } else {
             listadoProductos = invoker.ejecutarComando(new EliminarProductoCommand(listadoProductos, mani));
         }
-
+        StringBuilder sb = new StringBuilder("Descripción del pedido: \n");
         listadoProductos.forEach(p -> sb.append(p.getDescripcion()).append(":\t $").append(p.getPrecio()).append("\n"));
         subtotal = 0;
         for (Producto p : listadoProductos) {
@@ -142,7 +142,7 @@ public class PedidoController implements Initializable {
         }
         lblDescProductos.setText(sb.toString());
         lblSubTotal.setText(String.valueOf(subtotal));
-        lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
+        //lblDescuento.setText(String.valueOf(subtotal - totalConDescuento));
         this.generarPedido(event);
     }
 
